@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import NumCounter from "./NumCounter";
+import NumCounter from "../admin/NumCounter";
 
 function Form() {
   return (
     <Fragment>
-      <div id="formContainer">
+      <div className="form__wrapper wrapper">
         <div id="numCounter">
           <NumCounter />
           <button onClick={() => setCount(count + 1)}></button>

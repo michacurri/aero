@@ -1,4 +1,9 @@
 @import './styles/setup';
-@import './styles/main';
-@import './styles/header';
+@import './styles/variables';
+@import './styles/functions';
+@import './styles/mixins';
+@import './styles/typography';
+@import './styles/fonts';
+@import './styles/global';
+@import './styles/components/components'
 

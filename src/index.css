@@ -235,6 +235,10 @@ html {
   overflow: hidden;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 h1, h2, h3, h4, h5, li, ul, p {
   margin: 0;
   padding: 0;
@@ -252,22 +256,60 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.App {
-  background-color: black;
-  height: 100vh;
-  width: 100vw;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: (minmax(0, 1fr))[8];
-      grid-template-rows: repeat(8, minmax(0, 1fr));
-  -ms-grid-columns: (minmax(0, 1fr))[4];
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+h1 {
+  font-size: 5rem;
+  color: #33415c;
 }
 
-#sidebar {
-  grid-row: 1 / -1;
-  -ms-grid-column: 1;
-  grid-column: 1;
+h2 {
+  font-size: 3rem;
+  color: #5c677d;
+}
+
+h3 {
+  font-size: 2.5rem;
+  color: #f8f9fa;
+}
+
+h4 {
+  font-size: 2rem;
+  color: #f8f9fa;
+}
+
+h5 {
+  font-size: 1.6rem;
+  color: #f8f9fa;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+.header__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 15vh;
+  padding: 2rem;
+  background-color: #212529;
+}
+
+.advertHero__container {
+  height: 70vh;
+  max-height: 43rem;
+  width: 100vw;
+  padding: 3rem;
+  background-image: url(https://triathlonmagazine.ca/wp-content/uploads/2020/04/VentumZ_105_ENVE_Editorial_H-scaled.jpg;);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: none;
+  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -275,29 +317,31 @@ code {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.footer__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 5%;
-}
-
-#header {
-  display: -ms-grid;
-  display: grid;
-  background-color: darkslategray;
-  -ms-grid-row: 1;
-  grid-row: 1;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 6;
-  grid-column: 2 / 8;
-}
-
-#formContainer {
-  grid-row: 2 / -1;
-  grid-column: 2 / -1;
-  background-color: blue;
+  align-items: center;
+  height: 15vh;
+  padding: 2rem;
+  background-color: #212529;
 }
 /*# sourceMappingURL=index.css.map */

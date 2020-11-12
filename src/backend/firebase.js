@@ -1,15 +1,14 @@
-
 import firebase from 'firebase/app';
-import 'firebase/database';
+import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDubZXODGo07vxhmr73ic7uy6nawuSHoQk",
-  authDomain: "aero-workorder-management.firebaseapp.com",
-  databaseURL: "https://aero-workorder-management.firebaseio.com",
-  projectId: "aero-workorder-management",
-  storageBucket: "aero-workorder-management.appspot.com",
-  messagingSenderId: "1045580196773",
-  appId: "1:1045580196773:web:20f2d1328b7fea3faf164c"
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

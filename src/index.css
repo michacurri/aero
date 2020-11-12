@@ -285,6 +285,10 @@ p {
   font-size: 1.6rem;
 }
 
+button {
+  padding: 1rem;
+}
+
 .header__container {
   display: -webkit-box;
   display: -ms-flexbox;

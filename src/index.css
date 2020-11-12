@@ -285,6 +285,14 @@ p {
   font-size: 1.6rem;
 }
 
+main {
+  height: 70vh;
+}
+
+section {
+  height: 100%;
+}
+
 button {
   padding: 1rem;
 }
@@ -305,8 +313,7 @@ button {
 }
 
 .advertHero__container {
-  height: 70vh;
-  max-height: 43rem;
+  height: 100%;
   width: 100vw;
   padding: 3rem;
   background-image: url(https://triathlonmagazine.ca/wp-content/uploads/2020/04/VentumZ_105_ENVE_Editorial_H-scaled.jpg;);

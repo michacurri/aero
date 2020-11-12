@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
 
 import firebase from "../../backend/firebase";
@@ -12,7 +12,10 @@ const AuthContainer = (props) => {
     auth.onAuthStateChanged = () => {
         setCurrentUser(currentUser);
     };
-  }, []);
+    // figured out need to use the following line:     eslint-disable-next-line
+    // or enter [currentUser, setCurrentUser] into the dependency array
+
+  }, [currentUser, setCurrentUser]);
 
   const login = () => {
     auth.signInWithPopup(provider).then((result) => {

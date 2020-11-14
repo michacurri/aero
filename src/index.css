@@ -262,27 +262,34 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 4rem;
   color: #5c677d;
 }
 
 h3 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #f8f9fa;
 }
 
 h4 {
-  font-size: 2rem;
-  color: #f8f9fa;
+  font-size: 2.5rem;
+  color: black;
 }
 
 h5 {
-  font-size: 1.6rem;
-  color: #f8f9fa;
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: black;
 }
 
 p {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  color: black;
+}
+
+li {
+  font-size: 2rem;
+  color: black;
 }
 
 main {
@@ -319,7 +326,7 @@ button {
   background-image: url(https://triathlonmagazine.ca/wp-content/uploads/2020/04/VentumZ_105_ENVE_Editorial_H-scaled.jpg;);
   background-size: cover;
   background-position: bottom;
-  background-repeat: none;
+  background-repeat: no-repeat;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -354,5 +361,47 @@ button {
   height: 15vh;
   padding: 2rem;
   background-color: #212529;
+}
+
+.mainContentSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.mainContentSection #sidebar {
+  width: calc(100%/4);
+  height: 100%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: deepskyblue;
+}
+
+.mainContentSection #workorder {
+  width: calc(100%/4 * 3);
+  height: 100%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 /*# sourceMappingURL=index.css.map */

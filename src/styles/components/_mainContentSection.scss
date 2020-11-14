@@ -1,0 +1,27 @@
+.mainContentSection {
+  display: flex;
+  height: 100%;
+
+  #sidebar {
+    width: calc(100%/4);
+    height: 100%;
+    padding: 1rem;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    background-color: deepskyblue;
+  }
+  
+  #workorder {
+    width: calc(100%/4 * 3);
+    height: 100%;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}

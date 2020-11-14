@@ -15,14 +15,21 @@ h3 {
 
 h4 {
   font-size: $h4FontSize;
-  color: #f8f9fa;
+  color: black;
 }
 
 h5 {
   font-size: $h5FontSize;
-  color: #f8f9fa;
+  font-weight: bolder;
+  color: black;
 }
 
 p {
   font-size: $pFontSize;
+  color: black;
+}
+
+li {
+  font-size: $liFontSize;
+  color: black;
 }

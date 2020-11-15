@@ -239,7 +239,7 @@ html {
   font-size: 62.5%;
 }
 
-h1, h2, h3, h4, h5, li, ul, p {
+h1, h2, h3, h4, h5, h6, li, ul, p {
   margin: 0;
   padding: 0;
   color: lightgrey;
@@ -280,6 +280,12 @@ h5 {
   font-size: 1.8rem;
   font-weight: bolder;
   color: black;
+}
+
+h6 {
+  font-size: 1.6rem;
+  font-weight: lighter;
+  color: #5c677d;
 }
 
 p {
@@ -370,8 +376,8 @@ button {
   height: 100%;
 }
 
-.mainContentSection #sidebar {
-  width: calc(100%/4);
+.mainContentSection #sidebar__wrapper {
+  width: calc(100% / 4);
   height: 100%;
   padding: 1rem;
   display: -webkit-box;
@@ -390,8 +396,8 @@ button {
   background-color: deepskyblue;
 }
 
-.mainContentSection #workorder {
-  width: calc(100%/4 * 3);
+.mainContentSection #mainContent__wrapper {
+  width: calc(100% / 4 * 3);
   height: 100%;
   padding: 1rem;
   display: -webkit-box;
@@ -403,5 +409,6 @@ button {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  background-color: #5c677d;
 }
 /*# sourceMappingURL=index.css.map */

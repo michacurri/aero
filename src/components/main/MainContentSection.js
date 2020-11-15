@@ -1,24 +1,45 @@
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import AdvertHero from "./AdvertHero";
+import React, { useContext, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams,
+} from "react-router-dom";
 import Sidebar from "../admin/Sidebar";
 import Workorder from "./Workorder";
+import AdvertHero from "./AdvertHero";
+import Settings from "../admin/Settings";
 import { UserContext } from "../authorization/UserContext";
 
-const MainContentSection = () => {
+export default function MainContentSection() {
   const [currentUser, setCurrentUser] = useContext(UserContext);
 
-  return (
-    <Router>
-      {!currentUser ? <Route exact path="/" render={() => <AdvertHero />} /> : (     
+  let content;
+  if (currentUser) {
+    content = (
+      <Router>
         <div className="mainContentSection">
-          <Sidebar />
-          <Workorder />
+          <section id="sidebar__wrapper">
+            <Sidebar />
+          </section>
+          <section id="mainContent__wrapper">
+            <Switch>
+              <Route path="/:id" children={<Child />} />
+            </Switch>
+          </section>
         </div>
-      )
-      }
-    </Router>
-  );
-};
+      </Router>
+    );
+  } else {
+    content = <AdvertHero />;
+  }
 
-export default MainContentSection;
+  return content;
+}
+
+function Child() {
+  let { id } = useParams();
+  return <h3>this is the {id}</h3>;
+}
+
+// export default MainContentSection;

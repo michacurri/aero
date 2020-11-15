@@ -24,6 +24,12 @@ h5 {
   color: black;
 }
 
+h6 {
+  font-size: $h6FontSize;
+  font-weight: lighter;
+  color: #5c677d;
+}
+
 p {
   font-size: $pFontSize;
   color: black;

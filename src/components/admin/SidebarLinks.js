@@ -1,14 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function SidebarLinks() {
+function SidebarLinks(props) {
   return (
-    <div className="sidebarLinks">
-      <ul>
-        <li>Workorder</li>
-        <li>Settings</li>
-      </ul>
-    </div>
+    <Router>
+      <div className="sidebarLinks">
+        <ul>
+          <li>
+            <Link to="/workorder">Workorder</Link>
+          </li>
+          <li>
+            <Link to="/settings">Settings</Link>
+          </li>
+        </ul>
+      </div>
+    </Router>
   );
 }
 
-export default SidebarLinks
+export default SidebarLinks;

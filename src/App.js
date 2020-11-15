@@ -1,23 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Header from "./components/main/Header";
-import MainContentSection from './components/main/MainContentSection'
+import MainContentSection from "./components/main/MainContentSection";
 import Footer from "./components/main/Footer";
 import { UserProvider } from "./components/authorization/UserContext";
 
 const App = () => {
-
   return (
-    
-    <UserProvider>
+    <UserProvider>  
       <Router>
         <header className="header__container">
           <Header />
         </header>
         <main>
-          <section>
-            <MainContentSection />
-          </section>
+          <MainContentSection />
         </main>
         <footer className="main__footer">
           <Footer />
@@ -25,6 +21,6 @@ const App = () => {
       </Router>
     </UserProvider>
   );
-}
+};
 
 export default App;

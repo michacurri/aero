@@ -5,7 +5,7 @@ import React from 'react'
 function Workorder() {
 
   return(
-    <div id="workorder">
+    <div>
       <h4>New Workorder</h4>
     </div>
   )

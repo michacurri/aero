@@ -30,13 +30,12 @@ router.post("/", async (req, res) => {
     brand,
     model,
     colour,
-    service,
-    status,
-    // parts: [],
+    service: [],
+    status: [],
+    parts: [],
   } = req.body;
 
   const newWorkorder = new Workorder({
-    profiles: [],
     workorderNum,
     dateIn,
     dateOut,
@@ -45,28 +44,28 @@ router.post("/", async (req, res) => {
     colour,
     service,
     status,
-    parts: [],
-  });
+    parts
+    });
 
   const workorder = await newWorkorder.save();
   res.json(workorder);
 });
 
 // TODO
-// @route   POST /profiles/:profileId
+// @route   POST /profiles/:workorderId
 // @desc    Add id to URI
 // @access  Public
-router.post("/:profileId", async (req, res) => {
-  const { profileId } = req.params;
+router.post("/:workorderId", async (req, res) => {
+  const { workorderId } = req.params;
   const { memberId } = req.body;
 
   // Find the profile based on profileId in req.params
-  const workorder = await Workorder.findById(profileId);
+  const workorder = await Workorder.findById(workorderId);
   const profile = await Profile.findOne({ memberId: memberId });
 
   workorder.profiles.push(profile.name);
   const updatedWorkorder = await workorder.save();
-  profile.workorder.push(workorder.name);
+  profile.workorder.push(workorder.workorderNum);
   const updatedProfile = await profile.save();
   res.json({ updatedWorkorder, updatedProfile });
 });

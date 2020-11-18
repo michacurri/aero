@@ -6,7 +6,7 @@ import {
   useParams,
 } from "react-router-dom";
 import Sidebar from "../admin/Sidebar";
-import Workorder from "./Workorder";
+import Workorder from "./WorkorderComp";
 import AdvertHero from "./AdvertHero";
 import Settings from "../admin/Settings";
 import { UserContext } from "../authorization/UserContext";

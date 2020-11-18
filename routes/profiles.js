@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const Profile = require("../models/Profile");
-//! BELOW LINE NEEDS TO BE FIXED TO POINT TO THE CORRECT FILE
-// THERE WERE TWO Workorder.js 
-// WorkorderComp was adapted, and imports likely need checking
-const { default: Workorder } = require("..");
+// // ! BELOW LINE NEEDS TO BE FIXED TO POINT TO THE CORRECT FILE
+// // THERE WERE TWO Workorder.js 
+// //WorkorderComp was adapted, and imports likely need checking
+const Workorder = require("../models/Workorder");
 
 router.get("/", async (req, res) => {
   const profiles = await Profile.find();

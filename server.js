@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const uri = "mongodb://localhost:27017/aero-data";
+require("dotenv/config");
+const uri = process.env.REACT_APP_MONGODB_URI;
 const PORT = 5000;
+
+// Express body parser middlware
+app.use(express.json({ extended: false }));
 
 // connect to database
 mongoose
@@ -13,9 +17,6 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
-// Express body parser middlware
-app.use(express.json({ extended: false }));
 
 // TODO
 // Define Routes

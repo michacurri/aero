@@ -12,7 +12,7 @@ app.use(express.json({ extended: false }));
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log(`Successfully connected to: ${uri}`);
+    console.log(`Successfully connected to database server`);
   })
   .catch((err) => {
     console.log(err.message);

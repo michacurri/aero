@@ -3,8 +3,8 @@ const router = express.Router();
 
 // TODO
 // Require Models
-const Profile = require("../models/Profile");
-const Workorder = require("../models/Workorder");
+const Profile = require("../models/ProfileModel");
+const Workorder = require("../models/WorkorderModel");
 
 // TODO
 // @route   GET/workorders
@@ -12,9 +12,13 @@ const Workorder = require("../models/Workorder");
 // @access  Public
 router.get("/", async (req, res) => {
   // Gets all documents from workorders
-  const workorders = await Workorder.find();
-  // use express SYNTAX to retrieve the documents
-  res.json(workorders);
+  try {
+    const workorders = await Workorder.find();
+    // use express SYNTAX to retrieve the documents
+    res.json(workorders);
+  } catch (err) {
+    res.json({ error: err });
+  }
 });
 
 // TODO
@@ -30,9 +34,9 @@ router.post("/", async (req, res) => {
     brand,
     model,
     colour,
-    service: [],
-    status: [],
-    parts: [],
+    service,
+    status,
+    parts,
   } = req.body;
 
   const newWorkorder = new Workorder({
@@ -44,30 +48,60 @@ router.post("/", async (req, res) => {
     colour,
     service,
     status,
-    parts
-    });
+    parts,
+  });
 
-  const workorder = await newWorkorder.save();
-  res.json(workorder);
+  try {
+    const workorder = await newWorkorder.save();
+    res.json(workorder);
+  } catch (err) {
+    res.json({ error: err });
+  }
 });
 
 // TODO
-// @route   POST /profiles/:workorderId
-// @desc    Add id to URI
+// 1.   Create / Find Profile
+// 2.   with profileId loaded, create new workorder
+
+// @route   POST /profiles/:profileId
+// @desc    Add a workoder object to a profile based on the profileId passed in as a param
 // @access  Public
-router.post("/:workorderId", async (req, res) => {
-  const { workorderId } = req.params;
-  const { memberId } = req.body;
 
-  // Find the profile based on profileId in req.params
-  const workorder = await Workorder.findById(workorderId);
-  const profile = await Profile.findOne({ memberId: memberId });
+// router.post("/:profileId", async (req, res) => {
+//   const { profileId } = req.params;
+//   const { memberId } = req.body;
 
-  workorder.profiles.push(profile.name);
-  const updatedWorkorder = await workorder.save();
-  profile.workorder.push(workorder.workorderNum);
-  const updatedProfile = await profile.save();
-  res.json({ updatedWorkorder, updatedProfile });
+//   // Find the profile based on profileId in req.params
+//   const profile = await Profile.findById(profileId);
+//   // Find the workorder based on the member phone
+//   const workorder = await Workorder.find({ phone: phone });
+
+//   workorder.profiles.push(profile.name);
+//   const updatedWorkorder = await workorder.save();
+//   profile.workorder.push(workorder.workorderNum);
+//   const updatedProfile = await profile.save();
+//   res.json({ updatedWorkorder, updatedProfile });
+// });
+
+// TODO
+// Patch a workorder
+// will update whatever piece needs updating; no more
+
+router.patch("/:workorderId", (req, res) => {
+  const id = req.params.workorderId;
+  const updateOps = {};
+  for (const ops of req.body) {
+    updateOps[ops.propName] = ops.value;
+  }
+  Workorder.update({ _id: id }, { set: updateOps })
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
 });
 
 // TODO

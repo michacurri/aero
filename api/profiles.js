@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const Profile = require("../models/ProfileModel");
+const Profile = require("../api/profileSchema");
 // // ! BELOW LINE NEEDS TO BE FIXED TO POINT TO THE CORRECT FILE
 // // THERE WERE TWO Workorder.js
 // //WorkorderComp was adapted, and imports likely need checking
-const Workorder = require("../models/WorkorderModel");
+const Workorder = require("../api/workorderSchema");
 
 router.get("/", async (req, res) => {
   const profiles = await Profile.find();

@@ -1,4 +1,4 @@
-const Workorder = require("./workorderSchema");
+const Workorder = require("../models/workorderSchema");
 
 module.exports = {
   listWorkorders: (req, res) => {

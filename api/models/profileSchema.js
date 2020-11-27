@@ -16,7 +16,7 @@ const profileSchema = new Schema({
     required: true,
   },
   contact: contactSchema,
-  workorders: workorderSchema,
+  workorder: workorderSchema,
 });
 
 module.exports = mongoose.model("ProfileModel", profileSchema);

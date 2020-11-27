@@ -3,8 +3,8 @@ const router = express.Router();
 
 // TODO
 // Require Models
-const Profile = require("../models/ProfileModel");
-const Workorder = require("../models/WorkorderModel");
+const Profile = require("../models/profileSchema");
+const Workorder = require("../models/workorderSchema");
 
 // TODO
 // @route   GET/workorders

@@ -20,34 +20,34 @@ mongoose
     console.log({ error: err });
   });
 
-const profiles = require("./api/profileController");
-const workorders = require("./api/workorderController");
+  // Include your own logic here (so it has precedence over the wildcard route below
+  // * EXPRESS ROUTER MINI-APP
+  const profiles = require("./api/routes/profileRoutes");
+  const workorders = require("./api/routes/workorderRoutes");
+  app.get("/", (req, res) => console.log(`something will go here`));
+  app.use("/profiles", profiles);
+  app.use("/workorders", workorders);
+  
+  // * the following skips profileRouter.js
+  // const profiles = require('./api/controllers/profileController')
+  
+  // app.get("/", (req, res) => console.log(`something will go here`));
+  // app.get('/api/profiles', profiles.listProfiles)
+  // app.post('/api/profiles', profiles.createProfile)
+  // * ____________________________________
+  
+  // ? changed original from 'build' to '/'
+  // This serves all files placed in the /build
+  app.use(express.static("build"));
+  // app.use(express.static("/"));
 
-app.get("/api/profiles", profiles.listProfiles);
-app.post("/api/profiles", profiles.createProfile);
-
-// ! //
-// TODO
-// maybe /PROFILES/WORKORDERS to ensure user is defined
-// ////////////////////////////////////////////////////
-app.get("/api/workorders", workorders.listWorkorders);
-app.post("/api/workorders", workorders.createWorkorder);
-
-// This serves all files placed in the /build
-// app.use(express.static("build"));
-app.use(express.static("/"));
-
-// Include your own logic here (so it has precedence over the wildcard
-// route below)
-
-// This route serves your index.html file (which
-// initializes React)
+// ? removed 'build' from directory
+// This route serves your index.html file (which initializes React)
 app.get("*", function (req, res, next) {
-  // res.sendFile(path.join(__dirname, "build", "index.html"));
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+  // res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Start your server, and listen on port 8080.
 app.listen(PORT, function () {
   console.log(`Server is now listening on port ${PORT}!`);
 });

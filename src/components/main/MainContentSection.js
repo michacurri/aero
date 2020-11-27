@@ -16,9 +16,8 @@ function MainContentSection() {
   const [currentUser] = useContext(UserContext);
   const [workorderId, setWorkorderId] = useState(0);
 
-
   const updateWorkorderId = () => {
-     setWorkorderId(workorderId + 1);
+    setWorkorderId(workorderId + 1);
     //  return setWorkorderId
   };
   console.log(workorderId);
@@ -32,12 +31,14 @@ function MainContentSection() {
             <SidebarNav />
           </section>
           <section id="mainContent__wrapper">
+            <div className="mainContent">
             {/* prettier-ignore */}
-            <Switch>
-              <Route exact path="/" render={() => <Home />} />
-              <Route path="/workorder" render={() => <AddWorkorder workorderId={workorderId} updateWorkorderId={updateWorkorderId} />} />
-              <Route path="/settings" render={() => <Settings />} />
-          </Switch>
+              <Switch>
+                <Route exact path="/" render={() => <Home />} />
+                <Route path="/workorder" render={() => <AddWorkorder workorderId={workorderId} updateWorkorderId={updateWorkorderId} />} />
+                <Route path="/settings" render={() => <Settings />} />
+              </Switch>
+            </div>
           </section>
         </div>
       </Router>

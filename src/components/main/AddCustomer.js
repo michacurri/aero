@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import ContactEditor from "./ContactEditor";
 
-function AddContact(props) {
+function AddCustomer(props) {
   const [contact, setContact] = useState({});
-
+  console.log(contact);
+  
   const updateContactField = (e) => {
     const contactState = { ...contact };
     contactState[e.target.name] = e.target.value;
     setContact(contactState);
   };
-
+  
   const addRecord = async (e) => {
+    console.log(props);
     e.preventDefault();
     try {
-      const response = await fetch("/api/contacts", {
+      // ! ADDD SOMETHING TO THE FETCH
+      const response = await fetch("/profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstName, lastName, phone, email }),
@@ -27,7 +30,8 @@ function AddContact(props) {
       console.log(e);
     }
   };
-
+  const {firstName, lastName, phone, email} = contact;
+  
   return (
     <div>
       <form onSubmit={addRecord}>
@@ -38,4 +42,4 @@ function AddContact(props) {
   );
 }
 
-export default AddContact;
+export default AddCustomer;

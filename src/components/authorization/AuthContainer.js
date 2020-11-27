@@ -38,7 +38,7 @@ const AuthContainer = (props) => {
   return (
     //  prettier-ignore
     <div className="auth__buttons button">
-      {currentUser ? <button onClick={logout}>Sign out</button> : null}
+      {currentUser ? <button onClick={logout} >Sign out</button> : null}
       {currentUser ? null : <button onClick={login}>Sign in with Google</button>}
       {currentUser ? null : <button onClick={guest}>Sign in as a guest</button>}
     </div>

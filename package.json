@@ -8,8 +8,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase": "^8.0.1",
+    "mongoose": "^5.10.14",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.6",
     "object-path": "^0.11.5",
@@ -20,7 +22,7 @@
   },
   "scripts": {
     "start:client": "react-scripts start",
-    "start:server": "nodemon api/server.js --ignore src",
+    "start:server": "nodemon server.js --ignore src",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

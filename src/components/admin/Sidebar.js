@@ -1,15 +1,15 @@
 import React from 'react'
-import Date from "./Date";
+// import Date from "./Date";
 import SidebarLinks from './SidebarLinks'
 import QuickStats from "./QuickStats";
 
 
 function Sidebar() {
   return(
-    <div id="sidebar">
-      <Date />
-      <SidebarLinks />
+    <div>
       <QuickStats />
+      {/* <Date /> */}
+      <SidebarLinks />
     </div>
   )
 }

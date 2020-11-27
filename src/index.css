@@ -239,7 +239,7 @@ html {
   font-size: 62.5%;
 }
 
-h1, h2, h3, h4, h5, li, ul, p {
+h1, h2, h3, h4, h5, h6, li, ul, p {
   margin: 0;
   padding: 0;
   color: lightgrey;
@@ -262,27 +262,52 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 4rem;
   color: #5c677d;
 }
 
 h3 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #f8f9fa;
 }
 
 h4 {
-  font-size: 2rem;
-  color: #f8f9fa;
+  font-size: 2.5rem;
+  color: black;
 }
 
 h5 {
+  font-size: 1.8rem;
+  font-weight: bolder;
+  color: black;
+}
+
+h6 {
   font-size: 1.6rem;
-  color: #f8f9fa;
+  font-weight: lighter;
+  color: #5c677d;
 }
 
 p {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  color: black;
+}
+
+li {
+  font-size: 2rem;
+  color: black;
+}
+
+main {
+  height: 70vh;
+}
+
+section {
+  height: 100%;
+}
+
+button {
+  padding: 1rem;
 }
 
 .header__container {
@@ -301,14 +326,13 @@ p {
 }
 
 .advertHero__container {
-  height: 70vh;
-  max-height: 43rem;
+  height: 100%;
   width: 100vw;
   padding: 3rem;
   background-image: url(https://triathlonmagazine.ca/wp-content/uploads/2020/04/VentumZ_105_ENVE_Editorial_H-scaled.jpg;);
   background-size: cover;
   background-position: bottom;
-  background-repeat: none;
+  background-repeat: no-repeat;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -343,5 +367,86 @@ p {
   height: 15vh;
   padding: 2rem;
   background-color: #212529;
+}
+
+.mainContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.mainContent .main__child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mainContent .customer__wrapper {
+  height: calc(100% / 4 * 1);
+  background-color: #000000;
+}
+
+.mainContent .form__wrapper {
+  height: calc(100% / 4 * 3);
+}
+
+.mainContentSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.mainContentSection #sidebar__wrapper {
+  width: calc(100% / 4);
+  height: 100%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: deepskyblue;
+}
+
+.mainContentSection #mainContent__wrapper {
+  width: calc(100% / 4 * 3);
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: #5c677d;
 }
 /*# sourceMappingURL=index.css.map */

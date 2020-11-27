@@ -1,36 +1,14 @@
-// .App {
-//   background-color: black;
-//   height: 100vh;
-//   width: 100vw;
-//   display: grid;
-//   grid-template-rows: repeat(8, minmax(0, 1fr));
-//   grid-template-columns: repeat(4, minmax(0, 1fr));
-// }
+main {
+  height: 70vh;
+}
 
-// #sidebar {
-//   grid-row: 1 / -1;
-//   grid-column: 1;
+section {
+  height: 100%;
+}
 
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   align-items: center;
-
-//   padding: 5%;
-// }
-
-// #header {
-//   display: grid;
-//   background-color: darkslategray;
-//   grid-row: 1;
-//   grid-column: 2 / 8;
-// }
-
-// #formContainer {
-//   grid-row: 2 / -1;
-//   grid-column: 2 / -1;
-//   background-color: blue;
-// }
+button {
+  padding: 1rem;
+}
 
 .header__container {
   display: flex;
@@ -42,14 +20,13 @@
 }
 
 .advertHero__container {
-  height: 70vh;
-  max-height: 43rem;
+  height: 100%;
   width: 100vw;
   padding: 3rem;
   background-image: url(https://triathlonmagazine.ca/wp-content/uploads/2020/04/VentumZ_105_ENVE_Editorial_H-scaled.jpg;);
   background-size: cover;
   background-position: bottom;
-  background-repeat: none;
+  background-repeat: no-repeat;
   overflow: hidden;
 
   display: flex;
@@ -68,4 +45,29 @@
   height: 15vh;
   padding: 2rem;
   background-color: #212529;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+  width: 100%;
+
+  
+  .main__child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .customer__wrapper {
+    height: calc(100% / 4 * 1);
+    // background-color: #59A96A;
+    background-color: #000000;
+  }
+  .form__wrapper {
+    height: calc(100% / 4 * 3);
+  }
 }

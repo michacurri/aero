@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect, useState } from "react";
-import NumCounter from "../admin/NumCounter";
+import React, { Fragment } from "react";
+// import NumCounter from "../admin/NumCounter";
 
 function Form() {
   return (
     <Fragment>
       <div className="form__wrapper wrapper">
         <div id="numCounter">
-          <NumCounter />
-          <button onClick={() => setCount(count + 1)}></button>
+          <h2>hit me up</h2>
+          {/* <NumCounter /> */}
+          {/* <button onClick={() => setCount(count + 1)}></button> */}
         </div>
       </div>
     </Fragment>

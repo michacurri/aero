@@ -46,3 +46,28 @@ button {
   padding: 2rem;
   background-color: #212529;
 }
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+  width: 100%;
+
+  
+  .main__child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .customer__wrapper {
+    height: calc(100% / 4 * 1);
+    // background-color: #59A96A;
+    background-color: #000000;
+  }
+  .form__wrapper {
+    height: calc(100% / 4 * 3);
+  }
+}

@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 import SidebarNav from "./SidebarNav";
-import Workorder from "./Workorder";
-import Settings from "../admin/Settings";
+import AddWorkorder from "./AddWorkorder";
+import Settings from "./Settings";
 import AdvertHero from "./AdvertHero";
 import { UserContext } from "../authorization/UserContext";
 
@@ -17,7 +17,7 @@ function MainContentSection() {
   const [workorderId, setWorkorderId] = useState(0);
 
   const updateWorkorderId = () => {
-     setWorkorderId(workorderId + 1);
+    setWorkorderId(workorderId + 1);
     //  return setWorkorderId
   };
   console.log(workorderId);
@@ -31,14 +31,14 @@ function MainContentSection() {
             <SidebarNav />
           </section>
           <section id="mainContent__wrapper">
+            <div className="mainContent">
             {/* prettier-ignore */}
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/workorder" render={() => <Workorder workorderId={workorderId} updateWorkorderId={updateWorkorderId} />} />
-              <Route path="/settings" component={Settings} />
-              {/* <Route render={() => <Workorder onChange={value => setWorkorderId(value)} /> } /> */}
-              {/* <Route path="/:id" children={<Child />} /> */}
-          </Switch>
+              <Switch>
+                <Route exact path="/" render={() => <Home />} />
+                <Route path="/workorder" render={() => <AddWorkorder workorderId={workorderId} updateWorkorderId={updateWorkorderId} />} />
+                <Route path="/settings" render={() => <Settings />} />
+              </Switch>
+            </div>
           </section>
         </div>
       </Router>
@@ -49,10 +49,5 @@ function MainContentSection() {
 
   return content;
 }
-
-// function Child() {
-//   let { id } = useParams();
-//   return <h3>this is the {id}</h3>;
-// }
 
 export default MainContentSection;

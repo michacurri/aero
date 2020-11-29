@@ -1,26 +1,42 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
   // useParams,
 } from "react-router-dom";
 import Home from "./Home";
 import SidebarNav from "./SidebarNav";
-import AddWorkorder from "./AddWorkorder";
+import Profile from "./Profile";
+import WorkorderAdd from "./WorkorderAdd";
 import Settings from "./Settings";
 import AdvertHero from "./AdvertHero";
 import { UserContext } from "../authorization/UserContext";
 
 function MainContentSection() {
   const [currentUser] = useContext(UserContext);
-  const [workorderId, setWorkorderId] = useState(0);
+  const [profile, setProfile] = useState({});
 
-  const updateWorkorderId = () => {
-    setWorkorderId(workorderId + 1);
-    //  return setWorkorderId
-  };
-  console.log(workorderId);
+  const refresh = useCallback(async () => {
+    try {
+      const response = await fetch("/profile");
+      const profileRes = await response.json();
+      setProfile(profileRes);
+      console.log(response);
+      // * IF WORKORDER REQUESTS ARE REQUIRED
+      // const secondResponse = await fetch("/api/workorders");
+      // const workorderRes = await secondResponse.json();
+      // setWorkorders(workorderRes);
+
+    } catch (err) {
+      console.log({err});
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   let content;
   if (currentUser) {
@@ -32,10 +48,12 @@ function MainContentSection() {
           </section>
           <section id="mainContent__wrapper">
             <div className="mainContent">
-            {/* prettier-ignore */}
+              <Redirect to="/home" render={() => <Home profile={profile} />} />
+              {/* prettier-ignore */}
               <Switch>
-                <Route exact path="/" render={() => <Home />} />
-                <Route path="/workorder" render={() => <AddWorkorder workorderId={workorderId} updateWorkorderId={updateWorkorderId} />} />
+                <Route path="/home" render={() => <Home profile={profile}/>} />
+                <Route path="/profile" render={() => <Profile profile={profile} />} />
+                <Route path="/workorder" render={() => <WorkorderAdd />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>
             </div>

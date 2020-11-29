@@ -7,16 +7,17 @@ const Profile = require("../models/profileSchema");
 //    profile_delete
 
 module.exports = {
+  listProfiles: async (req, res) => {
+    const profiles = await Profile.find();
+    res.json(profiles);
+    
+    //! ______________________ALTERNATIVE TO ABOVE
   // profile_create_get: (req, res) => {
   //   res.render('create', {title: 'Create New Profile'})
   // },
 
-  listProfiles: (req, res) => {
-    Profile.find().then((records) => res.send(records));
-    //! ______________________ALTERNATIVE TO ABOVE
-    // async (req, res) => {
-    // const profiles = await Profile.find();
-    // res.json(profiles);
+  // listProfiles: (req, res) => {
+  //   Profile.find().then((records) => res.send(records));
     //! __________________________________________
   },
   createProfile: (req, res) => {
@@ -24,7 +25,9 @@ module.exports = {
     profile
       .save()
       .then(() => res.sendStatus(200))
-      .catch((err) => res.sendStatus(500));
+      .catch((err) => {
+        console.log(err)
+        res.sendStatus(500)});
 
     //! ______________________ALTERNATIVE TO ABOVE
     // createProfile: async (req, res) => {

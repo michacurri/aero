@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import Field from "./Field";
 // import Customer from "./Customer";
 
-const Workorder = (props) => {
+const WorkorderAdd = (props) => {
   // const [workorderId, setWorkorderId] = useState(0);
   const [brand, setBrand] = useState({});
   const [model, setModel] = useState({});
@@ -15,7 +15,7 @@ const Workorder = (props) => {
   const addRecord = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/workorders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ brand, model }),
@@ -71,4 +71,4 @@ const Workorder = (props) => {
 
 // }
 
-export default Workorder;
+export default WorkorderAdd;

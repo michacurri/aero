@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import ContactEditor from "./ContactEditor";
 
-function AddCustomer(props) {
+function ProfileAdd(props) {
   const [contact, setContact] = useState({});
-  console.log(contact);
   
   const updateContactField = (e) => {
     const contactState = { ...contact };
@@ -12,14 +11,12 @@ function AddCustomer(props) {
   };
   
   const addRecord = async (e) => {
-    console.log(props);
     e.preventDefault();
     try {
-      // ! ADDD SOMETHING TO THE FETCH
-      const response = await fetch("/profiles", {
+      const response = await fetch("/profile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName, lastName, phone, email }),
+        body: JSON.stringify({ contact }),
       });
       if (response.ok) {
         props.onAdd();
@@ -30,16 +27,16 @@ function AddCustomer(props) {
       console.log(e);
     }
   };
-  const {firstName, lastName, phone, email} = contact;
+  // const {firstName, lastName, phone, email} = contact;
   
   return (
     <div>
       <form onSubmit={addRecord}>
-        <ContactEditor onChange={updateContactField} contact={contact} />
+        <ContactEditor contact={contact} onChange={updateContactField} />
         <input type="submit" value="Save" />
       </form>
     </div>
   );
 }
 
-export default AddCustomer;
+export default ProfileAdd;

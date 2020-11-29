@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 require("dotenv/config");
-const uri = process.env.REACT_APP_MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
+const uri = "mongodb://localhost:27017/aero"
 const PORT = 5000;
 const mongoose = require("mongoose");
 
@@ -14,7 +15,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log(`Successfully connected to database server`);
+    console.log(`Successfully connected to database server ${uri}`);
   })
   .catch((err) => {
     console.log({ error: err });
@@ -22,13 +23,15 @@ mongoose
 
   // Include your own logic here (so it has precedence over the wildcard route below
   // * EXPRESS ROUTER MINI-APP
-  const profiles = require("./api/routes/profileRoutes");
-  const workorders = require("./api/routes/workorderRoutes");
-  app.get("/", (req, res) => console.log(`something will go here`));
-  app.use("/profiles", profiles);
-  app.use("/workorders", workorders);
+  const profile = require("./api/routes/profileRoutes");
+  const workorder = require("./api/routes/workorderRoutes");
+  // console.log(profile);
+  // console.log(workorder);
+  // app.get("/", (req, res) => console.log(`something will go here`));
+  app.use("/profile", profile);
+  app.use("/workorder", workorder);
   
-  // * the following skips profileRouter.js
+  // * the following skips profileRoutes.js
   // const profiles = require('./api/controllers/profileController')
   
   // app.get("/", (req, res) => console.log(`something will go here`));
@@ -38,14 +41,14 @@ mongoose
   
   // ? changed original from 'build' to '/'
   // This serves all files placed in the /build
-  app.use(express.static("build"));
-  // app.use(express.static("/"));
+  // app.use(express.static("build"));
+  app.use(express.static("/"));
 
 // ? removed 'build' from directory
 // This route serves your index.html file (which initializes React)
 app.get("*", function (req, res, next) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-  // res.sendFile(path.join(__dirname, "index.html"));
+  // res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(PORT, function () {

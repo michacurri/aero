@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
 
 import firebase from "../../backend/firebase";
+// import { Redirect } from "react-router-dom";
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 

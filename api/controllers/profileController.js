@@ -1,4 +1,4 @@
-const Profile = require("../models/profileSchema");
+const Profile = require("../models/profileModel");
 
 //    profile_create_get
 //    profiles_index
@@ -10,37 +10,60 @@ module.exports = {
   listProfiles: async (req, res) => {
     const profiles = await Profile.find();
     res.json(profiles);
-    
-    //! ______________________ALTERNATIVE TO ABOVE
-  // profile_create_get: (req, res) => {
-  //   res.render('create', {title: 'Create New Profile'})
-  // },
-
-  // listProfiles: (req, res) => {
-  //   Profile.find().then((records) => res.send(records));
-    //! __________________________________________
   },
-  createProfile: (req, res) => {
-    const profile = new Profile(req.body);
-    profile
-      .save()
-      .then(() => res.sendStatus(200))
-      .catch((err) => {
-        console.log(err)
-        res.sendStatus(500)});
+  findProfileByEmail: async (req, res) => {
+    const reqEmail = req.params.email;
+    try {
+      console.log(reqEmail);
+      const profileRes = await Profile.find({email: reqEmail});
+      res.json(profileRes);
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  findProfileByPhone: async (req, res) => {
+    const reqPhone = req.params.phone;
+    try {
+      console.log(reqPhone);
+      const profileRes = await Profile.find({phone: reqPhone});
+      res.json(profileRes);
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  findProfileByMemberId: async (req, res) => {
+    const reqMemberId = req.params.memberId;
+    try {
+      console.log(reqMemberId);
+      const profileRes = await Profile.find({memberId: reqMemberId});
+      res.json(profileRes);
+    } catch(err) {
+      console.log(err);
+    }
+  },
+  // createProfile: (req, res) => {
+  //   const profile = new Profile(req.body);
+  //   profile
+  //     .save()
+  //     .then(() => res.sendStatus(200))
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.sendStatus(500);
+  //     });
 
     //! ______________________ALTERNATIVE TO ABOVE
-    // createProfile: async (req, res) => {
-    //   const { firstName, lastName, phone, email } = req.body;
-    //   const newProfile = new Profile({
-    //     firstName,
-    //     lastName,
-    //     phone,
-    //     email,
-    //   });
-    //   console.log(newProfile);
-    //   const profile = await newProfile.save();
-    //   res.json(profile);
+    createProfile: async (req, res) => {
+      const { memberId, firstName, lastName, phone, email } = req.body;
+      const newProfile = new Profile({
+        memberId,
+        firstName,
+        lastName,
+        phone,
+        email,
+      });
+      console.log(newProfile);
+      const profile = await newProfile.save();
+      res.json(profile);
     //! __________________________________________
   },
   // TODO FINISH THE FOLLOWING REQUEST

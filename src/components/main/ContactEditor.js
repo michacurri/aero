@@ -1,7 +1,22 @@
 import React from "react";
 import Field from "./Field";
-const ContactEditor = ({ firstName, lastName, phone, email, onChange }) => (
+const ContactEditor = ({
+  memberId,
+  firstName,
+  lastName,
+  phone,
+  email,
+  onChange,
+}) => (
   <ul>
+    <li>
+      <Field
+        name="memberId"
+        label="Member ID"
+        value={memberId}
+        onChange={onChange}
+      />
+    </li>
     <li>
       <Field
         name="firstName"
@@ -27,12 +42,7 @@ const ContactEditor = ({ firstName, lastName, phone, email, onChange }) => (
       />
     </li>
     <li>
-      <Field 
-      name="email" 
-      label="Email" 
-      value={email} 
-      onChange={onChange} 
-      />
+      <Field name="email" label="Email" value={email} onChange={onChange} />
     </li>
   </ul>
 );

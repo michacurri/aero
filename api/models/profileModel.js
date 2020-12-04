@@ -1,15 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const workorderSchema = require("./workorderSchema");
+// const contactSchema = require("./contactSchema");
 
-//___ contactSchema
-// memberId:      Number
-// firstName:     String
-// lastName:      String
-// phone:         Number
-// email:         String
-// timestamps:    true
+//___ profileSchema
+// contact:     contactSchema
+// workorder:   workorderSchema
 
-const contactSchema = new Schema(
+const profileSchema = new Schema(
   {
     memberId: {
       type: Number,
@@ -31,10 +29,12 @@ const contactSchema = new Schema(
       type: String,
       required: true,
     },
+    OAuthUid: Number,
+    workorder: [workorderSchema],
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
 
-module.exports = contactSchema;
+module.exports = mongoose.model("ProfileModel", profileSchema);

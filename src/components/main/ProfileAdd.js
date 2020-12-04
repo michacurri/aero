@@ -13,7 +13,7 @@ function ProfileAdd(props) {
   const addRecord = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/profile", {
+      const response = await fetch("/profile/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contact }),

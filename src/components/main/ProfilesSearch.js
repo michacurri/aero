@@ -20,7 +20,6 @@ const ProfileSearch = (props) => {
       const response = await fetch(`/profile/search/${searchBy}/${value}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify({ value }),
       });
       if (response.ok) {
         props.onAdd();

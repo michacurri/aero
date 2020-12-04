@@ -15,13 +15,8 @@ import Settings from "./Settings";
 import AdvertHero from "./AdvertHero";
 import { UserContext } from "../authorization/UserContext";
 
-// function reducer(state, action) {
-  // return { profile: }
-// }
-
 function MainContentSection() {
   const [currentUser] = useContext(UserContext);
-  // const [state, dispatch] = useReducer(reducer, { profile: profile });
 
   let content;
   if (currentUser) {

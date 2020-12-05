@@ -98,6 +98,8 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
+//TODO - what is route '/me' ?
+
 router
   .use(verifyToken)
   .route("/me")

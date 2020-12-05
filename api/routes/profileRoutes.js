@@ -67,7 +67,7 @@ router.route("/create").post(async (req, res) => {
   }
 });
 
-router.router("/login").post(async (req, res) => {
+router.route("/login").post(async (req, res) => {
   const { email, password } = req.body;
   if (!email || email === " ") {
     res.status(400).json({ message: "email must be provided" });
@@ -100,7 +100,7 @@ router.router("/login").post(async (req, res) => {
 
 router
   .use(verifyToken)
-  .router("/me")
+  .route("/me")
   .get(async (req, res) => {
     try {
       const profile = await findProfileById(req.profile.id);

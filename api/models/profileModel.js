@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 const workorderSchema = require("./workorderSchema");
-// const contactSchema = require("./contactSchema");
 
 //___ profileSchema
 // contact:     contactSchema
@@ -9,10 +9,10 @@ const workorderSchema = require("./workorderSchema");
 
 const profileSchema = new Schema(
   {
-    memberId: {
-      type: Number,
-      required: true,
-    },
+    // memberId: {
+    //   type: Number,
+    //   required: true,
+    // },
     firstName: {
       type: String,
       required: true,
@@ -29,6 +29,10 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     OAuthUid: Number,
     workorder: [workorderSchema],
   },
@@ -36,5 +40,23 @@ const profileSchema = new Schema(
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
+
+profileSchema.pre("save", async function (next) {
+  const profile = this;
+  try {
+    if (profile.isModified("password") || profile.isNew) {
+      const hashedPassword = await bcrypt.hash(profile.password, 12);
+      profile.password = hashedPassword;
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+profileSchema.methods.comparePasswords = function (password) {
+  const profile = this;
+  return bcrypt.compare(password, profile.password);
+};
 
 module.exports = mongoose.model("ProfileModel", profileSchema);

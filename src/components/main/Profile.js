@@ -73,6 +73,7 @@ const Profile = ({ currentUser }) => {
         uid,
       };
       const parseJson = JSON.stringify(parseObject);
+      console.log(parseJson);
       return preloadQuery(parseJson);
     } else return null;
   }, [currentUser, preloadQuery]);

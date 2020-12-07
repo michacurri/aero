@@ -9,10 +9,6 @@ const workorderSchema = require("./workorderSchema");
 
 const profileSchema = new Schema(
   {
-    // memberId: {
-    //   type: Number,
-    //   required: true,
-    // },
     firstName: {
       type: String,
       required: true,

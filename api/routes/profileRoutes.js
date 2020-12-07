@@ -3,9 +3,7 @@
 // const profile = require("../controllers/profileController");
 
 // router.get("/search/all", profile.listProfiles);
-// router.get("/search/memberId/:memberId", profile.findProfileByMemberId);
 // router.get("/search/phone/:phone", profile.findProfileByPhone);
-// router.get("/search/email/:email", profile.findProfileByEmail);
 // router.post("/create", profile.createProfile);
 // // router.delete('/:id', profile.profile_delete)
 
@@ -23,6 +21,8 @@ const { verifyToken } = require("../middleware/verifyToken");
 const { createToken } = require("../tokens/tokenService");
 
 const router = express.Router();
+
+router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
@@ -65,6 +65,7 @@ router.route("/create").post(async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "internal server error" });
   }
+  console.log(profile);
 });
 
 router.route("/login").post(async (req, res) => {
@@ -99,7 +100,6 @@ router.route("/login").post(async (req, res) => {
 });
 
 //TODO - what is route '/me' ?
-
 router
   .use(verifyToken)
   .route("/me")

@@ -102,10 +102,9 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
-//TODO - what is route '/me' ?
 router
   .use(verifyToken)
-  .route("/me")
+  .route("/this")
   .get(async (req, res) => {
     try {
       const profile = await findProfileById(req.profile.id);

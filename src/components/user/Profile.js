@@ -24,8 +24,6 @@ const Profile = ({ currentUser }) => {
   const allProfiles = useRef({});
   const parseObject = useRef({});
 
-  console.log(profile);
-
   const refresh = useCallback(async () => {
     setProfile({});
     try {
@@ -36,6 +34,21 @@ const Profile = ({ currentUser }) => {
       console.log({ err });
     }
   }, []);
+
+  const getProfile = useCallback(async () => {
+    try {
+      const response = await fetch("/profile/this");
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error(json.message);
+      }
+      setProfile(json.data);
+    } catch (err) {
+      console.log(err);
+      setProfile(undefined);
+    }
+  }, [setProfile]);
+
 
   //* send user object to search and return a profile
   //TODO - if no profile exists, set up a new one
@@ -64,14 +77,12 @@ const Profile = ({ currentUser }) => {
       const lastName = await firstLast.split(" ").pop();
       const phone = await currentUser.phone;
       const email = await currentUser.email;
-      const password = await currentUser.password;
       const uid = await currentUser.uid;
       parseObject.current = {
         firstName,
         lastName,
         phone,
         email,
-        password,
         uid,
       };
       const parseJson = JSON.stringify(parseObject);
@@ -82,8 +93,9 @@ const Profile = ({ currentUser }) => {
 
   useEffect(() => {
     refresh();
+    getProfile()
     preloadParse();
-  }, [refresh, preloadParse]);
+  }, [refresh, getProfile, preloadParse]);
 
   const searchProfiles = () => {
     setSearchOrAdd("search");
@@ -92,13 +104,14 @@ const Profile = ({ currentUser }) => {
     setSearchOrAdd("add");
   };
 
+  //! CHANGE BELOW TO INCLUDE ProfileSearchOrAdd.js functionality
   return (
     <Fragment>
       {!profile._id ? (
-        <ProfileSearchOrAdd
+        <ProfileCreate
           profile={profile}
           searchOrAdd={searchOrAdd}
-          onAdd={refresh}
+          getProfile={getProfile}
           searchProfiles={searchProfiles}
           addProfile={addProfile}
           setProfile={setProfile}

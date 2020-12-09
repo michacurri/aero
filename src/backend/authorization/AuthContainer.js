@@ -60,7 +60,8 @@ const AuthContainer = (props) => {
           </div>
         </Route>
         <Route path="/signup">
-          <ProfileCreate />
+          <Profile />
+          {/* was <ProfileCreate /> */}
         </Route>
       </Switch>
     </Fragment>

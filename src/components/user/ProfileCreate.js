@@ -18,15 +18,13 @@ function ProfileCreate(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contact),
       });
-      if (response.ok) {
-        // todo  -  find and understand onAdd() in notes lesson
-        props.onAdd();
-        console.log(response);
-      } else {
-        console.log("Error when saving record");
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
       }
-    } catch (e) {
-      console.log(e);
+      props.getProfile();
+    } catch (err) {
+      console.log(err);
     }
   };
 

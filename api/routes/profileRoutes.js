@@ -26,6 +26,7 @@ router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
+  console.log(req.body);
   if (!firstName || firstName === " ") {
     res.status(400).json({ message: "firstName must be provided" });
     return;
@@ -60,12 +61,14 @@ router.route("/create").post(async (req, res) => {
       phone,
       password,
     });
-    res.json({ data: { id: profile._id } });
+    console.log(profile);
+    res
+    .status(200)
+    .json({ data: { id: profile._id } });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "internal server error" });
+    res.status(500).json({ message: "ProfileRoutes.js: 68 - internal server error" });
   }
-  console.log(profile);
 });
 
 router.route("/login").post(async (req, res) => {

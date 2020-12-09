@@ -11,10 +11,6 @@ const { Schema } = mongoose;
 
 const contactSchema = new Schema(
   {
-    memberId: {
-      type: Number,
-      required: true,
-    },
     firstName: {
       type: String,
       required: true,
@@ -28,6 +24,10 @@ const contactSchema = new Schema(
       required: true,
     },
     email: {
+      type: String,
+      required: true,
+    },
+    password: {
       type: String,
       required: true,
     },

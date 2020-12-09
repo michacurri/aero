@@ -23,7 +23,8 @@ const profileSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: true,   
+      unique: true,
     },
     password: {
       type: String,
@@ -39,6 +40,8 @@ const profileSchema = new Schema(
 
 profileSchema.pre("save", async function (next) {
   const profile = this;
+  console.log(profile);
+  console.log(profile.password);
   try {
     if (profile.isModified("password") || profile.isNew) {
       const hashedPassword = await bcrypt.hash(profile.password, 12);

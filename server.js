@@ -7,12 +7,16 @@ const uri = "mongodb://localhost:27017/aero"
 const PORT = 5000;
 const mongoose = require("mongoose");
 
-app.use(express.json({ extended: false }));
+// app.use(express.json());
+// app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => {
     console.log(`Successfully connected to database server ${uri}`);

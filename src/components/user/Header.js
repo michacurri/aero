@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
-import AuthContainer from "../authorization/AuthContainer";
-import { UserContext } from "../authorization/UserContext";
+import AuthContainer from "../../backend/authorization/AuthContainer";
+import { UserContext } from "../../backend/authorization/UserContext";
 
 function Header({ loginClick, setLoginClick }) {
   const [currentUser] = useContext(UserContext);
@@ -19,7 +19,7 @@ function Header({ loginClick, setLoginClick }) {
       <Fragment>
         <h2>AERO</h2>
         {loginClick ? (
-          <button onClick={toggleButton}>X</button>
+          <button onClick={toggleButton}>Close</button>
         ) : (
           <button onClick={toggleButton}>Login / Signup</button>
         )}

@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import ProfileDisplay from "./ProfileDisplay";
-import ProfileSearchOrAdd from "./ProfileSearchOrAdd";
+import ProfileSearchOrAdd from "../admin/ProfileSearchOrAdd";
 
 const headers = {
   Accept: "application/json",
@@ -62,14 +62,16 @@ const Profile = ({ currentUser }) => {
       const firstLast = await currentUser.displayName;
       const firstName = await firstLast.split(" ").shift();
       const lastName = await firstLast.split(" ").pop();
-      const email = await currentUser.email;
       const phone = await currentUser.phone;
+      const email = await currentUser.email;
+      const password = await currentUser.password;
       const uid = await currentUser.uid;
       parseObject.current = {
         firstName,
         lastName,
-        email,
         phone,
+        email,
+        password,
         uid,
       };
       const parseJson = JSON.stringify(parseObject);

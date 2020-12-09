@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
-
-import firebase from "../../backend/firebase";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
+import ProfileCreate from "../../components/user/ProfileCreate";
+import firebase from "../firebase";
 // import { Redirect } from "react-router-dom";
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -42,12 +43,27 @@ const AuthContainer = (props) => {
   };
 
   return (
-    //  prettier-ignore
-    <div className="auth__buttons button">
-      {currentUser ? <button onClick={logout}>Sign out</button> : null}
-      {currentUser ? null : <button onClick={googleLogin}>Sign in with Google</button>}
-      {currentUser ? null : <button onClick={googleGuest}>Sign in as a guest</button>}
-    </div>
+    <Fragment>
+      <Redirect to="/login" />
+      {/* prettier-ignore */}
+      <nav><ul>
+        <li><Link to="/login">Sign In</Link></li>
+        <li><Link to="/signup">Sign Up</Link></li>
+      </ul></nav>
+      <Switch>
+        <Route path="/login">
+          {/* prettier-ignore */}
+          <div className="auth__buttons button">
+            {currentUser ? <button onClick={logout}>Sign out</button> : null}
+            {currentUser ? null : (<button onClick={googleLogin}>Sign in with Google</button>)}
+            {currentUser ? null : (<button onClick={googleGuest}>Sign in as a guest</button>)}
+          </div>
+        </Route>
+        <Route path="/signup">
+          <ProfileCreate />
+        </Route>
+      </Switch>
+    </Fragment>
   );
 };
 

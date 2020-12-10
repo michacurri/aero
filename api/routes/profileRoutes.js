@@ -73,6 +73,8 @@ router.route("/create").post(async (req, res) => {
 
 router.route("/login").post(async (req, res) => {
   const { email, password } = req.body;
+  // console.log(req.body);
+  // console.log(email, password);
   if (!email || email === " ") {
     res.status(400).json({ message: "email must be provided" });
     return;
@@ -83,7 +85,7 @@ router.route("/login").post(async (req, res) => {
   }
 
   try {
-    const profile = await findUserByEmail(email);
+    const profile = await findProfileByEmail(email);
     if (!profile) {
       res.status(400).json({ message: "email and password do not match" });
       return;
@@ -106,6 +108,7 @@ router
   .use(verifyToken)
   .route("/this")
   .get(async (req, res) => {
+    console.log(req.profile);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

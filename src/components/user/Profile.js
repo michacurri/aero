@@ -104,11 +104,11 @@ const Profile = ({ currentUser }) => {
     setSearchOrAdd("add");
   };
 
-  //! CHANGE BELOW TO INCLUDE ProfileSearchOrAdd.js functionality
   return (
     <Fragment>
       {!profile._id ? (
-        <ProfileCreate
+        <ProfileSearchOrAdd
+        // <ProfileCreate
           profile={profile}
           searchOrAdd={searchOrAdd}
           getProfile={getProfile}

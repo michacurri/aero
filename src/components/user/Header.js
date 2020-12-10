@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import AuthContainer from "../../backend/authorization/AuthContainer";
+// import AuthContainer from "../../backend/authorization/AuthContainer";
 import { UserContext } from "../../backend/authorization/UserContext";
 
 function Header({ loginClick, setLoginClick }) {
@@ -29,7 +29,6 @@ function Header({ loginClick, setLoginClick }) {
     content = (
       <Fragment>
         <h2>AERO</h2>
-        <AuthContainer />
       </Fragment>
     );
   }

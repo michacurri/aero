@@ -1,20 +1,35 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { UserContext } from "./UserContext";
-import { Link, Switch, Route, Redirect } from "react-router-dom";
-import ProfileCreate from "../../components/user/ProfileCreate";
-import firebase from "../firebase";
-// import { Redirect } from "react-router-dom";
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+import { ImpersonatorContext } from "./ImpersonatorContext";
+import AuthLoginSignup from "./AuthLoginSignup";
+// import firebase from "../firebase";
+// const auth = firebase.auth();
+// const provider = new firebase.auth.GoogleAuthProvider();
 
-const AuthContainer = (props) => {
+const AuthContainer = () => {
   const [currentUser, setCurrentUser] = useContext(UserContext);
+  const [impersonator, setImpersonator] = useContext(ImpersonatorContext);
+
+  const getProfile = useCallback(async () => {
+    try {
+      const response = await fetch("/profile/this");
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error(json.message);
+      }
+      setCurrentUser(json.data);
+    } catch (err) {
+      console.log(err);
+      setCurrentUser(undefined);
+    }
+  }, [setCurrentUser]);
 
   useEffect(() => {
-    auth.onAuthStateChanged = () => {
-      setCurrentUser(currentUser);
-    };
-  }, [currentUser, setCurrentUser]);
+    // auth.onAuthStateChanged = () => {
+    //   setCurrentUser(currentUser);
+    // };
+    getProfile();
+  }, [getProfile]);
 
   // const login = () => {
   //   // TODO - redirect to a login form
@@ -35,36 +50,19 @@ const AuthContainer = (props) => {
   };
 
   const logout = () => {
-    // TODO - if statement to reflect either google logout or normal
-    // TODO - redirect to <AdvertHero />
     auth.signOut().then(() => {
       setCurrentUser(null);
     });
   };
 
   return (
-    <Fragment>
-      <Redirect to="/login" />
-      {/* prettier-ignore */}
-      <nav><ul>
-        <li><Link to="/login">Sign In</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
-      </ul></nav>
-      <Switch>
-        <Route path="/login">
-          {/* prettier-ignore */}
-          <div className="auth__buttons button">
-            {currentUser ? <button onClick={logout}>Sign out</button> : null}
-            {currentUser ? null : (<button onClick={googleLogin}>Sign in with Google</button>)}
-            {currentUser ? null : (<button onClick={googleGuest}>Sign in as a guest</button>)}
-          </div>
-        </Route>
-        <Route path="/signup">
-          <Profile />
-          {/* was <ProfileCreate /> */}
-        </Route>
-      </Switch>
-    </Fragment>
+    <AuthLoginSignup
+      currentUser={currentUser}
+      googleLogin={googleLogin}
+      googleGuest={googleGuest}
+      logout={logout}
+      getProfile={getProfile}
+    />
   );
 };
 

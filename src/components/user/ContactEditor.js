@@ -14,7 +14,6 @@ const ContactEditor = ({
         name="firstName"
         label="First Name"
         value={firstName}
-        type="firstName"
         id="firstName"
         onChange={onChange}
       />
@@ -24,7 +23,6 @@ const ContactEditor = ({
         name="lastName"
         label="Last Name"
         value={lastName}
-        type="lastName"
         id="lastName"
         onChange={onChange}
       />
@@ -34,7 +32,6 @@ const ContactEditor = ({
         name="phone"
         label="Phone Number"
         value={phone}
-        type="phone"
         id="phone"
         onChange={onChange}
         />
@@ -44,7 +41,6 @@ const ContactEditor = ({
         name="email" 
         label="Email" 
         value={email} 
-        type="email"
         id="email"        
         onChange={onChange} 
         />
@@ -54,7 +50,6 @@ const ContactEditor = ({
         name="password"
         label="Password"
         value={password}
-        type="password"
         id="password"        
         onChange={onChange}
       />

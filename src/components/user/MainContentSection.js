@@ -19,7 +19,6 @@ function MainContentSection({ loginClick }) {
   //* else, show <AdvertHero />
 
   const toggleRoute = useCallback(() => {
-    console.log(loginClick);
     if (loginClick) {
       return <Redirect exact from="/" to="/login" />;
     } else {

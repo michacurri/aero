@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import ProfilesSearch from "../user/ProfilesSearch";
-import ProfileCreate from "../user/ProfileCreate";
+import ProfilesSearch from "./ProfilesSearch";
+import ProfileCreate from "../root/ProfileCreate";
 
 const ProfileSearchOrCreate = ({
   refresh,

@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from "react";
-import ContactEditor from "./ContactEditor";
+import ContactEditor from "../root/ContactEditor";
 
 const ProfileSearch = (props) => {
-  // const [contact, setContact] = useState({});
-  const [value, setValue] = useState({});
   const [searchBy, setSearchBy] = useState(null);
+  const [value, setValue] = useState({});
 
   const updateSearchField = (e) => {
     const searchQuery = { ...value };

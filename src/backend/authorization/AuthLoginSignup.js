@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link, Switch, Route, Redirect } from "react-router-dom";
-import ProfileCreate from "../../components/user/ProfileCreate";
-import Field from "../../components/user/Field";
+import ProfileCreate from "../../components/root/ProfileCreate";
+import Field from "../../components/root/Field";
 
 function AuthLoginSignup({ loadUserProfile }) {
   const [email, setEmail] = useState("");

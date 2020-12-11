@@ -1,9 +1,9 @@
 import React from "react";
 
-const ProfileDisplay = ({ memberId, firstName, lastName, phone, email }) => {
+const ProfileDisplay = ({currentProfile}) => {
+  const {firstName, lastName, phone, email} = currentProfile;
   return (
     <ul>
-      <li>{memberId}</li>
       <li>{firstName}</li>
       <li>{lastName}</li>
       <li>{phone}</li>

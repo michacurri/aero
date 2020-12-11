@@ -40,8 +40,8 @@ const profileSchema = new Schema(
 
 profileSchema.pre("save", async function (next) {
   const profile = this;
-  console.log(profile);
-  console.log(profile.password);
+  // console.log(profile);
+  // console.log(profile.password);
   try {
     if (profile.isModified("password") || profile.isNew) {
       const hashedPassword = await bcrypt.hash(profile.password, 12);

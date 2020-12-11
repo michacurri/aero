@@ -13,7 +13,6 @@ router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
-  console.log(req.body);
   if (!firstName || firstName === " ") {
     res.status(400).json({ message: "firstName must be provided" });
     return;
@@ -48,7 +47,6 @@ router.route("/create").post(async (req, res) => {
       phone,
       password,
     });
-    console.log(profile);
     res
     .status(200)
     .json({ data: { id: profile._id } });
@@ -60,8 +58,6 @@ router.route("/create").post(async (req, res) => {
 
 router.route("/login").post(async (req, res) => {
   const { email, password } = req.body;
-  // console.log(req.body);
-  // console.log(email, password);
   if (!email || email === " ") {
     res.status(400).json({ message: "email must be provided" });
     return;
@@ -97,7 +93,6 @@ router
 .use(verifyToken)
 .route("/this")
 .get(async (req, res) => {
-  console.log(req.profile);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

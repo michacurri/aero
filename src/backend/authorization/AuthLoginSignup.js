@@ -1,7 +1,12 @@
 import React, { Fragment, useState } from "react";
 import { Link, Switch, Route, Redirect } from "react-router-dom";
-import ProfileCreate from "../../components/user/ProfileCreate";
-import Field from "../../components/user/Field";
+import ProfileCreate from "../../components/root/ProfileCreate";
+import Field from "../../components/root/Field";
+
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
 
 function AuthLoginSignup({ loadUserProfile }) {
   const [email, setEmail] = useState("");
@@ -17,9 +22,7 @@ function AuthLoginSignup({ loadUserProfile }) {
     try {
       const response = await fetch("/profile/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();

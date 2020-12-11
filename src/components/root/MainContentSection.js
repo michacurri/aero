@@ -4,8 +4,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import SidebarNav from "./SidebarNav";
 import Profile from "./Profile";
-import WorkorderAdd from "./WorkorderAdd";
-import Settings from "./Settings";
+import Workorder from "./Workorder";
+import Settings from "../admin/Settings";
 import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 
@@ -45,7 +45,7 @@ function MainContentSection({ loginClick }) {
               <Switch>
                 <Route path="/home" render={() => <Home />} />
                 <Route path="/profile" render={() => <Profile currentUser={currentUser} />} />
-                <Route path="/workorder" render={() => <WorkorderAdd />} />
+                <Route path="/workorder" render={() => <Workorder />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>
             </div>

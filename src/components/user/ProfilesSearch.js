@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
-import SearchEditor from "./SearchEditor";
+import React, { useState, Fragment } from "react";
 import ContactEditor from "./ContactEditor";
 
 const ProfileSearch = (props) => {

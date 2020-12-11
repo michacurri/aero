@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import ProfilesSearch from "./ProfilesSearch";
-import ProfileAdd from "./ProfileAdd";
+import ProfilesSearch from "../user/ProfilesSearch";
+import ProfileCreate from "../user/ProfileCreate";
 
-const ProfileSearchOrAdd = ({
+const ProfileSearchOrCreate = ({
   refresh,
   profile,
   searchProfiles,
@@ -24,7 +24,7 @@ const ProfileSearchOrAdd = ({
         </div>
       ) : (
         <div className="profile__addBox">
-          <ProfileAdd
+          <ProfileCreate
             onAdd={refresh}
             profile={profile}
             setProfile={setProfile}
@@ -35,4 +35,4 @@ const ProfileSearchOrAdd = ({
   );
 };
 
-export default ProfileSearchOrAdd;
+export default ProfileSearchOrCreate;

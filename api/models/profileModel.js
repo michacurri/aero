@@ -9,10 +9,6 @@ const workorderSchema = require("./workorderSchema");
 
 const profileSchema = new Schema(
   {
-    // memberId: {
-    //   type: Number,
-    //   required: true,
-    // },
     firstName: {
       type: String,
       required: true,
@@ -27,7 +23,8 @@ const profileSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: true,   
+      unique: true,
     },
     password: {
       type: String,
@@ -43,6 +40,8 @@ const profileSchema = new Schema(
 
 profileSchema.pre("save", async function (next) {
   const profile = this;
+  console.log(profile);
+  console.log(profile.password);
   try {
     if (profile.isModified("password") || profile.isNew) {
       const hashedPassword = await bcrypt.hash(profile.password, 12);
@@ -59,4 +58,4 @@ profileSchema.methods.comparePasswords = function (password) {
   return bcrypt.compare(password, profile.password);
 };
 
-module.exports = mongoose.model("ProfileModel", profileSchema);
+module.exports = mongoose.model("Profile", profileSchema);

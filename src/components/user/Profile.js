@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import ProfileDisplay from "./ProfileDisplay";
-import ProfileSearchOrAdd from "./ProfileSearchOrAdd";
+import ProfileSearchOrAdd from "../admin/ProfileSearchOrAdd";
 
 const headers = {
   Accept: "application/json",
@@ -24,8 +24,6 @@ const Profile = ({ currentUser }) => {
   const allProfiles = useRef({});
   const parseObject = useRef({});
 
-  console.log(profile);
-
   const refresh = useCallback(async () => {
     setProfile({});
     try {
@@ -36,6 +34,21 @@ const Profile = ({ currentUser }) => {
       console.log({ err });
     }
   }, []);
+
+  const getProfile = useCallback(async () => {
+    try {
+      const response = await fetch("/profile/this");
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error(json.message);
+      }
+      setProfile(json.data);
+    } catch (err) {
+      console.log(err);
+      setProfile(undefined);
+    }
+  }, [setProfile]);
+
 
   //* send user object to search and return a profile
   //TODO - if no profile exists, set up a new one
@@ -62,25 +75,27 @@ const Profile = ({ currentUser }) => {
       const firstLast = await currentUser.displayName;
       const firstName = await firstLast.split(" ").shift();
       const lastName = await firstLast.split(" ").pop();
-      const email = await currentUser.email;
       const phone = await currentUser.phone;
+      const email = await currentUser.email;
       const uid = await currentUser.uid;
       parseObject.current = {
         firstName,
         lastName,
-        email,
         phone,
+        email,
         uid,
       };
       const parseJson = JSON.stringify(parseObject);
+      console.log(parseJson);
       return preloadQuery(parseJson);
     } else return null;
   }, [currentUser, preloadQuery]);
 
   useEffect(() => {
     refresh();
+    getProfile()
     preloadParse();
-  }, [refresh, preloadParse]);
+  }, [refresh, getProfile, preloadParse]);
 
   const searchProfiles = () => {
     setSearchOrAdd("search");
@@ -93,9 +108,10 @@ const Profile = ({ currentUser }) => {
     <Fragment>
       {!profile._id ? (
         <ProfileSearchOrAdd
+        // <ProfileCreate
           profile={profile}
           searchOrAdd={searchOrAdd}
-          onAdd={refresh}
+          getProfile={getProfile}
           searchProfiles={searchProfiles}
           addProfile={addProfile}
           setProfile={setProfile}

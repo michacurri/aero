@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import Header from "./components/main/Header";
-import MainContentSection from "./components/main/MainContentSection";
-import Footer from "./components/main/Footer";
-import { UserProvider } from "./components/authorization/UserContext";
+import Header from "./components/user/Header";
+import MainContentSection from "./components/user/MainContentSection";
+import Footer from "./components/user/Footer";
+import { UserProvider } from "./backend/authorization/UserContext";
+import { ImpersonatorProvider } from "./backend/authorization/ImpersonatorContext";
 
 const App = () => {
+  const [loginClick, setLoginClick] = useState(false);
+
   return (
-    <UserProvider>  
-      <Router>
-        <header className="header__container">
-          <Header />
-        </header>
-        <main>
-          <MainContentSection />
-        </main>
-        <footer className="main__footer">
-          <Footer />
-        </footer>
-      </Router>
+    <UserProvider>
+      <ImpersonatorProvider>
+        <Router>
+          <header className="header__container">
+            <Header loginClick={loginClick} setLoginClick={setLoginClick} />
+          </header>
+          <main>
+            <MainContentSection loginClick={loginClick} />
+          </main>
+          <footer className="main__footer">
+            <Footer />
+          </footer>
+        </Router>
+      </ImpersonatorProvider>
     </UserProvider>
   );
 };

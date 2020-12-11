@@ -5,9 +5,11 @@ const KEY = "I have ten toes";
 
 // create a function that will generate a token using this secret
 exports.createToken = (profile) => {
+  console.log(profile);
   // payload + header
   // mix it with KEY and generate the signature
   const token = jwt.sign(profile, KEY);
+  // console.log(token);
   return token;
 };
 

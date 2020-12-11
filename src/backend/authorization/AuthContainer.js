@@ -39,7 +39,10 @@ const AuthContainer = () => {
     loadUserProfile();
   }, [loadImpersonator, loadUserProfile]);
 
-  return <AuthLoginSignup loadUserProfile={loadUserProfile} />;
+  return (
+    <AuthLoginSignup loadUserProfile={loadUserProfile}
+    />
+  );
 };
 
 export default AuthContainer;

@@ -1,44 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState, Fragment } from "react";
 import ProfileDisplay from "./ProfileDisplay";
-import ProfileSearchOrAdd from "../admin/ProfileSearchOrAdd";
+import ProfileCreate from './ProfileCreate';
+import ProfileSearch from './ProfilesSearch'
 import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
 import { UserContext } from "../../backend/authorization/UserContext";
 
-// const headers = {
-//   Accept: "application/json",
-//   "Content-Type": "application/json",
-// };
-
 //  _______ Profile
 // Return two buttons that control whether to Sign In or Sign Up or add
-// On Login check if profile exists in DB
+// On Login check if currentProfile exists in DB
 // TODO - IF user is ADMIN show everything
 
 const Profile = () => {
   const [impersonator] = useContext(ImpersonatorContext);
-  const [currentProfile] = useContext(UserContext);
+  const [currentProfile, setCurrentProfile] = useContext(UserContext);
   const [searchOrAdd, setSearchOrAdd] = useState(null);
-  // const [profile, setProfile] = useState({});
-  // console.log(currentProfile);
 
-  // const refreshProfile = useCallback(async () => {
-  //   try {
-  //     const userEmail = currentProfile.email;
-  //     const response = await fetch(`/profile/search/email/${userEmail}`, {
-  //       method: "GET",
-  //       headers: headers,
-  //     });
-  //     console.log(response);
-  //     const profileRes = await response.json();
-  //     setProfile(profileRes[0]);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, [setProfile, currentProfile]);
+  // const refresh = useCallback( () => {
 
-  // useEffect(() => {
-  //   refreshProfile();
-  // }, [refreshProfile]);
+  // }, )
 
   const searchProfiles = () => {
     setSearchOrAdd("search");
@@ -47,20 +26,41 @@ const Profile = () => {
     setSearchOrAdd("add");
   };
 
+  // useEffect(() => {
+  //   refresh()
+  // },[refresh])
+
   let content;
   if (impersonator) {
     if (!currentProfile._id) {
       content = (
-        <ProfileSearchOrAdd
-          searchOrAdd={searchOrAdd}
-          searchProfiles={searchProfiles}
-          addProfile={addProfile}
-          // setProfile={setProfile}
-        />
+        <Fragment>
+          <button onClick={searchProfiles}>Search For a Profile</button>
+          <button onClick={addProfile}>Add a new Profile</button>
+          {searchOrAdd === "search" ? (
+            <div className="profile__searchBox">
+              <ProfileSearch
+                // onAdd={refresh}
+                currentProfile={currentProfile}
+                setCurrentProfile={setCurrentProfile}
+              />
+            </div>
+          ) : (
+            <div className="profile__addBox">
+              <ProfileCreate
+                // onAdd={refresh}
+                currentProfile={currentProfile}
+                setCurrentProfile={setCurrentProfile}
+              />
+            </div>
+          )}
+        </Fragment>
       );
     } else {
       content = <ProfileDisplay currentProfile={currentProfile} />;
-      // and show some additional settings, like change profile
+      // and show some additional settings, like change currentProfile
+      // edit current currentProfile
+      // add workorder
     }
   } else {
     content = <ProfileDisplay currentProfile={currentProfile} />;

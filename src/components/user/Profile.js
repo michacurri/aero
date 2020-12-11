@@ -15,14 +15,15 @@ const headers = {
 };
 
 //  _______ Profile
-// Return two buttons that control whether to search or add
-// On Login with Google OAuth, check if profile exists in DB
-// -- load profile if it exists; else send to "add new"
+// Return two buttons that control whether to Sign In or Sign Up or add
+// On Login check if profile exists in DB
+// TODO - IF user is ADMIN show everything
 
 const Profile = () => {
   const [currentUser] = useContext(UserContext);
   const [searchOrAdd, setSearchOrAdd] = useState(null);
   const [profile, setProfile] = useState({});
+  console.log(currentUser);
 
   const refreshProfile = useCallback(async () => {
     try {
@@ -38,11 +39,11 @@ const Profile = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [setProfile]);
+  }, [setProfile, currentUser]);
 
   useEffect(() => {
     refreshProfile();
-  }, [refreshProfile()]);
+  }, [refreshProfile]);
 
   const searchProfiles = () => {
     setSearchOrAdd("search");
@@ -55,7 +56,6 @@ const Profile = () => {
     <Fragment>
       {!profile._id ? (
         <ProfileSearchOrAdd
-          // <ProfileCreate
           profile={profile}
           searchOrAdd={searchOrAdd}
           searchProfiles={searchProfiles}

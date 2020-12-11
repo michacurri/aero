@@ -58,4 +58,4 @@ profileSchema.methods.comparePasswords = function (password) {
   return bcrypt.compare(password, profile.password);
 };
 
-module.exports = mongoose.model("ProfileModel", profileSchema);
+module.exports = mongoose.model("Profile", profileSchema);

@@ -5,14 +5,16 @@ import Field from "../../components/user/Field";
 
 function AuthLoginSignup({
   currentUser,
-  googleLogin,
-  googleGuest,
-  logout,
   getProfile,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+
+  function redirectHome() {
+    return <Redirect to="/home" />;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,14 +28,14 @@ function AuthLoginSignup({
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-
+      // console.log(data);
       if (!response.ok) {
         throw new Error(data.message);
       }
       // calling getProfile() in Profile.js
       // call /profile/this, get info about user with NEW token
       getProfile();
-      return <Redirect to="/home" />;
+      redirectHome();
     } catch (err) {
       setError(err.message);
       console.log(error);
@@ -80,11 +82,11 @@ function AuthLoginSignup({
             </form>
           </div>
           {/* prettier-ignore */}
-          <div className="auth__buttons button">
+          {/* <div className="auth__buttons button">
             {currentUser ? <button onClick={logout}>Sign out</button> : null}
             {currentUser ? null : (<button onClick={googleLogin}>Sign in with Google</button>)}
             {currentUser ? null : (<button onClick={googleGuest}>Sign in as a guest</button>)}
-          </div>
+          </div> */}
         </Route>
         <Route path="/signup">
           <ProfileCreate />

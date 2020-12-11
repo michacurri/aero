@@ -10,19 +10,28 @@ const AuthContainer = () => {
   const [currentUser, setCurrentUser] = useContext(UserContext);
   const [impersonator, setImpersonator] = useContext(ImpersonatorContext);
 
-  const getProfile = useCallback(async () => {
-    try {
-      const response = await fetch("/profile/this");
-      const json = await response.json();
-      if (!response.ok) {
-        throw new Error(json.message);
+  const getProfile = useCallback(
+    async function () {
+      try {
+        const response = await fetch("/profile/this", {
+          headers: {
+            // by default this is set to 'same-origin' which will work in development
+            credentials: "include",
+          },
+        });
+        const json = await response.json();
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(json.message);
+        }
+        setCurrentUser(json.data);
+      } catch (err) {
+        console.log(err);
+        setCurrentUser(undefined);
       }
-      setCurrentUser(json.data);
-    } catch (err) {
-      console.log(err);
-      setCurrentUser(undefined);
-    }
-  }, [setCurrentUser]);
+    },
+    [setCurrentUser]
+  );
 
   useEffect(() => {
     // auth.onAuthStateChanged = () => {
@@ -37,30 +46,30 @@ const AuthContainer = () => {
   //   return <Link to="/login" />;
   // };
 
-  const googleLogin = () => {
-    auth.signInWithPopup(provider).then((result) => {
-      setCurrentUser(result.user);
-    });
-  };
+  // const googleLogin = () => {
+  //   auth.signInWithPopup(provider).then((result) => {
+  //     setCurrentUser(result.user);
+  //   });
+  // };
 
-  const googleGuest = () => {
-    auth.signInAnonymously().then((result) => {
-      setCurrentUser(result.user);
-    });
-  };
+  // const googleGuest = () => {
+  //   auth.signInAnonymously().then((result) => {
+  //     setCurrentUser(result.user);
+  //   });
+  // };
 
-  const logout = () => {
-    auth.signOut().then(() => {
-      setCurrentUser(null);
-    });
-  };
+  // const logout = () => {
+  //   auth.signOut().then(() => {
+  //     setCurrentUser(null);
+  //   });
+  // };
 
   return (
     <AuthLoginSignup
-      currentUser={currentUser}
-      googleLogin={googleLogin}
-      googleGuest={googleGuest}
-      logout={logout}
+      // currentUser={currentUser}
+      // googleLogin={googleLogin}
+      // googleGuest={googleGuest}
+      // logout={logout}
       getProfile={getProfile}
     />
   );

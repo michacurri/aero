@@ -1,16 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const profile = require("../controllers/profileController");
-
-// router.get("/search/all", profile.listProfiles);
-// router.get("/search/phone/:phone", profile.findProfileByPhone);
-// router.post("/create", profile.createProfile);
-// // router.delete('/:id', profile.profile_delete)
-
-// module.exports = router;
-
-//! ___________________________________________
-
 const express = require("express");
 const {
   createProfile,
@@ -97,7 +84,9 @@ router.route("/login").post(async (req, res) => {
       return;
     }
     const token = createToken({ id: profile._id });
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      maxAge: 10000,
+    });
     res.status(200).send({});
   } catch (err) {
     console.log(err);
@@ -105,10 +94,10 @@ router.route("/login").post(async (req, res) => {
 });
 
 router
-  .use(verifyToken)
-  .route("/this")
-  .get(async (req, res) => {
-    console.log(req.profile);
+.use(verifyToken)
+.route("/this")
+.get(async (req, res) => {
+  console.log(req.profile);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

@@ -27,7 +27,22 @@ module.exports = {
       const profileRes = await Profile.findOne({ email });
       return profileRes;
     } catch (err) {
-      console.log(err);
+      throw err;
+      // console.log(err);
+    }
+  },
+  findProfileById: async (id) => {
+    try {
+      const profile = await Profile.findById(id);
+      //* return everything but password
+      return {
+        id: profile._id,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: profile.email,
+      };
+    } catch (err) {
+      throw err;
     }
   },
   findProfileByPhone: async (req, res) => {

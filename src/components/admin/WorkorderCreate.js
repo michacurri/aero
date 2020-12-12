@@ -1,16 +1,13 @@
 import React, { Fragment, useState } from "react";
-import Field from "../root/Field";
-// import Customer from "./Customer";
+import WorkorderEditor from "../root/WorkorderEditor";
 
 const WorkorderAdd = (props) => {
-  // const [workorderId, setWorkorderId] = useState(0);
-  const [brand, setBrand] = useState({});
-  const [model, setModel] = useState({});
-
-  // const { updateWorkorderId } = props;
-  // const handleSubmit = () => {
-  //   updateWorkorderId();
-  // };
+  const [workorder, setWorkorder] = useState();
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  // const [colour, setColour] = useState("");
+  // const [status, setStatus] = useState([]);
+  // const [service, setService] = useState([]);
 
   const addRecord = async (e) => {
     e.preventDefault();
@@ -38,26 +35,7 @@ const WorkorderAdd = (props) => {
       <div className="main__child form__wrapper">
         <h4>New Workorder</h4>
         <form onSubmit={addRecord}>
-          {/* //!  CHANGE TO A LABEL ONLY*/}
-          {/* <Field
-          label="Workorder ID"
-          value={workorderId}
-          name="workorderId"
-          onChange={(e) => setWorkorderId(e.target.value)}
-        /> */}
-          {/* //!  */}
-          <Field
-            label="Brand"
-            value={brand}
-            name="brand"
-            onChange={(e) => setBrand(e.target.value)}
-          />
-          <Field
-            label="Model"
-            value={model}
-            name="model"
-            onChange={(e) => setModel(e.target.value)}
-          />
+          <WorkorderEditor workorder={workorder} onChange={addRecord} />
           <input type="submit" value="Save" />
         </form>
       </div>

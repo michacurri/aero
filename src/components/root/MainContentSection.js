@@ -10,11 +10,11 @@ import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 
 function MainContentSection({ loginClick }) {
-  const [currentUser] = useContext(UserContext);
+  const [currentUserProfile] = useContext(UserContext);
 
   // TODO
   //* if "LOGIN" clicked, show <Login />
-  //? --- // if (!currentUser), show Login Options
+  //? --- // if (!currentUserProfile), show Login Options
   //? --- // else, show logged in Content
   //* else, show <AdvertHero />
 
@@ -32,7 +32,7 @@ function MainContentSection({ loginClick }) {
 
   let content;
   if (loginClick) {
-    if (currentUser) {
+    if (currentUserProfile) {
       content = (
         <div className="mainContentSection">
           <section id="sidebar__wrapper">
@@ -44,7 +44,7 @@ function MainContentSection({ loginClick }) {
               {/* prettier-ignore */}
               <Switch>
                 <Route path="/home" render={() => <Home />} />
-                <Route path="/profile" render={() => <Profile currentUser={currentUser} />} />
+                <Route path="/profile" render={() => <Profile currentUserProfile={currentUserProfile} />} />
                 <Route path="/workorder" render={() => <Workorder />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>

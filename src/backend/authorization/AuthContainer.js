@@ -7,11 +7,11 @@ const AuthContainer = () => {
   const [currentUser, setCurrentUser] = useContext(UserContext);
   const [impersonator, setImpersonator] = useContext(ImpersonatorContext);
 
-  const loadImpersonator = useCallback(() => {
-    setTimeout(() => {
-      setImpersonator(undefined);
-    }, [3000]);
-  }, [setImpersonator]);
+  //* const loadImpersonator = useCallback(() => {
+  //   setTimeout(() => {
+  //     setImpersonator(undefined);
+  //   }, [3000]);
+  // }, [setImpersonator]);
 
   const loadUserProfile = useCallback(
     async function () {
@@ -34,10 +34,10 @@ const AuthContainer = () => {
     [setCurrentUser]
   );
 
-  useEffect(() => {
-    loadImpersonator();
-    loadUserProfile();
-  }, [loadImpersonator, loadUserProfile]);
+  // useEffect(() => {
+  //   loadImpersonator();
+  //   // loadUserProfile();
+  // }, [loadImpersonator]);
 
   return (
     <AuthLoginSignup loadUserProfile={loadUserProfile}

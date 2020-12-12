@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import ContactEditor from "./ContactEditor";
+import { Redirect } from "react-router-dom";
 
-function ProfileCreate(props) {
+function ProfileCreate() {
   const [contact, setContact] = useState();
+
+  function redirectLogin() {
+    return <Redirect to="/login" />;
+  }
 
   const updateContactField = (e) => {
     const contactState = { ...contact };
@@ -22,7 +27,7 @@ function ProfileCreate(props) {
       if (!response.ok) {
         throw new Error(data.message);
       }
-      props.getProfile();
+      redirectLogin();
     } catch (err) {
       console.log(err);
     }

@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useContext, Fragment } from "react";
+import { UserContext } from "../../backend/authorization/UserContext";
+import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
+import WorkorderDisplay from "./WorkorderDisplay";
+import WorkorderCreate from "../admin/WorkorderCreate";
 
 const Workorder = () => {
-  return <h3>Workorders</h3>
-}
+  const [currentUserProfile] = useContext(UserContext);
+  const [impersonator] = useContext(ImpersonatorContext);
 
-export default Workorder
+  let content;
+  if (!impersonator) {
+    content = (
+      <Fragment>
+        <WorkorderDisplay currentUserProfile={currentUserProfile} />
+        <WorkorderCreate currentUserProfile={currentUserProfile} />
+      </Fragment>
+    );
+  } else {
+    content = (
+      <Fragment>
+        <WorkorderDisplay currentUserProfile={currentUserProfile} />
+        <h5>Admin Search options</h5>
+        <WorkorderCreate currentUserProfile={currentUserProfile} />
+      </Fragment>
+    );
+  }
+  return content;
+};
+
+export default Workorder;

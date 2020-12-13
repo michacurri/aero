@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useContext, Fragment } from "react";
 import { UserContext } from "../../backend/authorization/UserContext";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Home from "./Home";
@@ -10,29 +10,11 @@ import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 
 function MainContentSection({ loginClick }) {
-  const [currentUser] = useContext(UserContext);
-
-  // TODO
-  //* if "LOGIN" clicked, show <Login />
-  //? --- // if (!currentUser), show Login Options
-  //? --- // else, show logged in Content
-  //* else, show <AdvertHero />
-
-  const toggleRoute = useCallback(() => {
-    if (loginClick) {
-      return <Redirect exact from="/" to="/login" />;
-    } else {
-      return <Redirect exact from="/login" to="/" />;
-    }
-  }, [loginClick]);
-
-  useEffect(() => {
-    toggleRoute();
-  }, [toggleRoute]);
+  const [currentUserProfile] = useContext(UserContext);
 
   let content;
   if (loginClick) {
-    if (currentUser) {
+    if (currentUserProfile) {
       content = (
         <div className="mainContentSection">
           <section id="sidebar__wrapper">
@@ -44,7 +26,7 @@ function MainContentSection({ loginClick }) {
               {/* prettier-ignore */}
               <Switch>
                 <Route path="/home" render={() => <Home />} />
-                <Route path="/profile" render={() => <Profile currentUser={currentUser} />} />
+                <Route path="/profile" render={() => <Profile currentUserProfile={currentUserProfile} />} />
                 <Route path="/workorder" render={() => <Workorder />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>
@@ -56,7 +38,12 @@ function MainContentSection({ loginClick }) {
       content = <AuthContainer />;
     }
   } else {
-    content = <AdvertHero />;
+    content = (
+      <Fragment>
+        <Redirect exact to="/" />
+        <AdvertHero />;
+      </Fragment>
+    );
   }
 
   return content;

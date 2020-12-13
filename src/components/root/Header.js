@@ -1,16 +1,20 @@
 import React, { Fragment, useContext } from "react";
-// import AuthContainer from "../../backend/authorization/AuthContainer";
 import { UserContext } from "../../backend/authorization/UserContext";
 
 function Header({ loginClick, setLoginClick }) {
-  const [currentUser] = useContext(UserContext);
+  const [currentUser, setCurrentUser] = useContext(UserContext);
 
-  function toggleButton() {
+  function toggleLoginClick() {
     if (loginClick === false) {
       setLoginClick(true);
     } else {
       setLoginClick(false);
     }
+  }
+
+  function logout() {
+    setCurrentUser(undefined);
+    toggleLoginClick();
   }
 
   let content;
@@ -19,9 +23,9 @@ function Header({ loginClick, setLoginClick }) {
       <Fragment>
         <h2>AERO</h2>
         {loginClick ? (
-          <button onClick={toggleButton}>Close</button>
+          <button onClick={toggleLoginClick}>Close</button>
         ) : (
-          <button onClick={toggleButton}>Login / Signup</button>
+          <button onClick={toggleLoginClick}>Login / Signup</button>
         )}
       </Fragment>
     );
@@ -29,6 +33,7 @@ function Header({ loginClick, setLoginClick }) {
     content = (
       <Fragment>
         <h2>AERO</h2>
+        <button onClick={logout}>Logout</button>
       </Fragment>
     );
   }

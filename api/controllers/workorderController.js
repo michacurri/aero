@@ -1,15 +1,24 @@
 const Workorder = require("../models/workorderSchema");
 
-module.exports = {
-  listWorkorders: (req, res) => {
-    Workorder.find().then((records) => res.send(records));
-  },
-
-  createWorkorder: (req, res) => {
-    const workorder = new Workorder(req.body);
-    workorder
-      .save()
-      .then(() => res.sendStatus(200))
-      .catch((err) => res.sendStatus(500));
-  },
+exports.createWorkorder = async ({brand, model, colour}) => {
+  try {
+    const newWorkorder = new Workorder({brand, model, colour});
+    const workorder = await newWorkorder.save();
+    return workorder.id;
+  } catch (err) {
+    throw err;
+  }
 };
+
+  // createWorkorder: async ({ brand, model, colour }) => {
+  //   const newWorkorder = {
+  //     brand,
+  //     model,
+  //     colour,
+  //   }; 
+  //   const workorder = await newWorkorder.save();
+  //   console.log("----woController");
+  //   return workorder;
+  // },
+
+

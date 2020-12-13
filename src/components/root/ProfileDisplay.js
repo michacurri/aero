@@ -13,7 +13,7 @@ const ProfileDisplay = ({ currentProfile }) => {
         </ul>
       </div>
       <div className="profile__latestWorkorder">
-        // for loop display last 3 workorders
+        {/* for loop display last 3 workorders */}
       </div>
     </Fragment>
   );

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Services = require('./serviceSchema');
+// const Services = require('./serviceSchema');
 const { Schema } = mongoose;
 
 //___ workorderSchema
@@ -18,19 +18,15 @@ const { Schema } = mongoose;
 
 const workorderSchema = new Schema(
   {
-    workorderNum: {
-      type: Number,
-      required: true,
-    },
-    dateIn: {
-      type: String,
-      default: Date(),
-      required: true,
-    },
-    dateOut: {
-      type: String,
-      default: true,
-    },
+    // dateIn: {
+    //   type: String,
+    //   default: Date(),
+    //   required: true,
+    // },
+    // dateOut: {
+    //   type: String,
+    //   default: true,
+    // },
     brand: {
       type: String,
       required: true,
@@ -41,19 +37,20 @@ const workorderSchema = new Schema(
     },
     colour: {
       type: String,
-      default: true,
+      required: true,
     },
-    service: [Services],
+    // service: [Services],
 
     // status: {
-    //   type: [],
+    //   type: [status],
     //   default: true,
     // },
     // parts: [],
   },
-  {
-    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
-  }
+  // {
+  //   timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  // }
 );
 
 module.exports = workorderSchema;
+

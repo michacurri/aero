@@ -12,10 +12,15 @@ function AuthLoginSignup({ loadUserProfile }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [link, setLink] = useState("signup");
 
-  function redirectHome() {
-    return <Redirect to="/home" />;
-  }
+  const changeLink = () => {
+    if (link === "signup") {
+      setLink("login");
+    } else {
+      setLink("signup");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +35,6 @@ function AuthLoginSignup({ loadUserProfile }) {
         throw new Error(data.message);
       }
       loadUserProfile();
-      redirectHome();
     } catch (err) {
       setError(err.message);
       console.log(error);
@@ -40,11 +44,6 @@ function AuthLoginSignup({ loadUserProfile }) {
   return (
     <Fragment>
       <Redirect to="/login" />
-      {/* prettier-ignore */}
-      <nav><ul>
-          <li><Link to="/login">Sign In</Link></li>
-          <li><Link to="/signup">Sign Up</Link></li>
-        </ul></nav>
       <Switch>
         <Route path="/login">
           <div className="auth__loginForm">
@@ -61,22 +60,24 @@ function AuthLoginSignup({ loadUserProfile }) {
               <Field
                 name="password"
                 label="Password"
-                // type="password"
                 id="password"
-                // autoComplete="current-password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
               />
-              <button type="submit">Sign In</button>
+              <button type="submit">Login</button>
             </form>
           </div>
         </Route>
         <Route path="/signup">
-          <ProfileCreate />
+          <ProfileCreate changeLink={changeLink} />
         </Route>
       </Switch>
+      {/* prettier-ignore */}
+      <nav><ul>
+          <li><Link to={`${link}`} onClick={changeLink}>{`${link}`}</Link></li>
+        </ul></nav>
     </Fragment>
   );
 }

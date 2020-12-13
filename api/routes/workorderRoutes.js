@@ -28,27 +28,25 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   // Create a new workorder from the information entered through req.body
   const {
-    workorderNum,
     dateIn,
-    dateOut,
+    // dateOut,
     brand,
     model,
     colour,
-    service,
-    status,
-    parts,
+    // service,
+    // status,
+    // parts,
   } = req.body;
 
   const newWorkorder = new Workorder({
-    workorderNum,
     dateIn,
-    dateOut,
+    // dateOut,
     brand,
     model,
     colour,
-    service,
-    status,
-    parts,
+    // service,
+    // status,
+    // parts,
   });
 
   try {
@@ -58,30 +56,6 @@ router.post("/", async (req, res) => {
     res.json({ error: err });
   }
 });
-
-// TODO
-// 1.   Create / Find Profile
-// 2.   with profileId loaded, create new workorder
-
-// @route   POST /profiles/:profileId
-// @desc    Add a workoder object to a profile based on the profileId passed in as a param
-// @access  Public
-
-// router.post("/:profileId", async (req, res) => {
-//   const { profileId } = req.params;
-//   const { memberId } = req.body;
-
-//   // Find the profile based on profileId in req.params
-//   const profile = await Profile.findById(profileId);
-//   // Find the workorder based on the member phone
-//   const workorder = await Workorder.find({ phone: phone });
-
-//   workorder.profiles.push(profile.name);
-//   const updatedWorkorder = await workorder.save();
-//   profile.workorder.push(workorder.workorderNum);
-//   const updatedProfile = await profile.save();
-//   res.json({ updatedWorkorder, updatedProfile });
-// });
 
 // TODO
 // Patch a workorder

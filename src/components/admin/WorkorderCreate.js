@@ -14,12 +14,10 @@ const WorkorderAdd = ({ currentUserProfile }) => {
     e.preventDefault();
     try {
       const profileId = currentUserProfile.id;
-      // const { brand, model, colour, status, service } = workorder;
       const { brand, model, colour } = workorder;
       const response = await fetch(`/profile/workorder/create/${profileId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify({ brand, model, colour, status, service }),
         body: JSON.stringify({ brand, model, colour }),
       });
       if (response.ok) {

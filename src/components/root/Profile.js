@@ -15,20 +15,12 @@ const Profile = () => {
   const [currentProfile, setCurrentProfile] = useContext(UserContext);
   const [searchOrAdd, setSearchOrAdd] = useState(null);
 
-  // const refresh = useCallback( () => {
-
-  // }, )
-
   const searchProfiles = () => {
     setSearchOrAdd("search");
   };
   const addProfile = () => {
     setSearchOrAdd("add");
   };
-
-  // useEffect(() => {
-  //   refresh()
-  // },[refresh])
 
   let content;
   if (impersonator) {
@@ -40,7 +32,6 @@ const Profile = () => {
           {searchOrAdd === "search" ? (
             <div className="profile__searchBox">
               <ProfileSearch
-                // onAdd={refresh}
                 currentProfile={currentProfile}
                 setCurrentProfile={setCurrentProfile}
               />
@@ -48,7 +39,6 @@ const Profile = () => {
           ) : (
             <div className="profile__addBox">
               <ProfileCreate
-                // onAdd={refresh}
                 currentProfile={currentProfile}
                 setCurrentProfile={setCurrentProfile}
               />

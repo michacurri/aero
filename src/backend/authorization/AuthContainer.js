@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useCallback } from "react";
 import { UserContext } from "./UserContext";
 import { ImpersonatorContext } from "./ImpersonatorContext";
 import AuthLoginSignup from "./AuthLoginSignup";
@@ -33,12 +33,6 @@ const AuthContainer = () => {
     },
     [setCurrentUser]
   );
-
-  // useEffect(() => {
-  //   loadImpersonator();
-  //   // loadUserProfile();
-  // }, [loadImpersonator]);
-
   return (
     <AuthLoginSignup loadUserProfile={loadUserProfile}
     />

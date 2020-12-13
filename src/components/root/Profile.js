@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Fragment } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import ProfileDisplay from "./ProfileDisplay";
 import ProfileCreate from './ProfileCreate';
 import ProfileSearch from './ProfilesSearch'

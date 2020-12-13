@@ -14,17 +14,13 @@ function AuthLoginSignup({ loadUserProfile }) {
   const [error, setError] = useState("");
   const [link, setLink] = useState("signup");
 
-  function redirectHome() {
-    return <Redirect to="/home" />;
-  }
-
   const changeLink = () => {
     if (link === "signup") {
-      setLink("login")
+      setLink("login");
     } else {
-      setLink("signup")
+      setLink("signup");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +35,6 @@ function AuthLoginSignup({ loadUserProfile }) {
         throw new Error(data.message);
       }
       loadUserProfile();
-      redirectHome();
     } catch (err) {
       setError(err.message);
       console.log(error);
@@ -76,7 +71,7 @@ function AuthLoginSignup({ loadUserProfile }) {
           </div>
         </Route>
         <Route path="/signup">
-          <ProfileCreate />
+          <ProfileCreate changeLink={changeLink} />
         </Route>
       </Switch>
       {/* prettier-ignore */}

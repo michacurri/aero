@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+// import AuthLoginSignup from "../../backend/authorization/AuthLoginSignup";
 import ContactEditor from "./ContactEditor";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-function ProfileCreate() {
+function ProfileCreate({ changeLink }) {
   const [contact, setContact] = useState();
-
-  function redirectLogin() {
-    return <Redirect to="/login" />;
-  }
+  const history = useHistory();
 
   const updateContactField = (e) => {
     const contactState = { ...contact };
     contactState[e.target.name] = e.target.value;
     setContact(contactState);
+  };
+
+  const redirectOnSubmit = () => {
+    history.push("/login");
+    changeLink();
   };
 
   const addRecord = async (e) => {
@@ -27,7 +30,7 @@ function ProfileCreate() {
       if (!response.ok) {
         throw new Error(data.message);
       }
-      redirectLogin();
+      redirectOnSubmit();
     } catch (err) {
       console.log(err);
     }

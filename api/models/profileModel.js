@@ -30,8 +30,8 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
-    OAuthUid: Number,
-    workorder: [workorderSchema],
+    // OAuthUid: Number,
+    workorders: [workorderSchema],
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
@@ -40,8 +40,6 @@ const profileSchema = new Schema(
 
 profileSchema.pre("save", async function (next) {
   const profile = this;
-  // console.log(profile);
-  // console.log(profile.password);
   try {
     if (profile.isModified("password") || profile.isNew) {
       const hashedPassword = await bcrypt.hash(profile.password, 12);

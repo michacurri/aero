@@ -4,8 +4,8 @@ const WorkorderEditor = ({
   brand,
   model,
   colour,
-  status,
-  service,
+  // status,
+  // service,
   onChange,
 }) => (
   <ul>
@@ -36,7 +36,7 @@ const WorkorderEditor = ({
         onChange={onChange}
       />
     </li>
-    <li>
+    {/* <li>
       <Field
         name="status"
         label="Status"
@@ -53,7 +53,7 @@ const WorkorderEditor = ({
         id="service"
         onChange={onChange}
       />
-    </li>
+    </li> */}
   </ul>
 );
 export default WorkorderEditor;

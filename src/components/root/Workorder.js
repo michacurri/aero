@@ -8,27 +8,22 @@ const Workorder = () => {
   const [currentUserProfile] = useContext(UserContext);
   const [impersonator] = useContext(ImpersonatorContext);
 
-  const { workorder } = currentUserProfile;
-  console.log(workorder);
-
   let content;
   if (!impersonator) {
-    if (workorder) {
-      content = <WorkorderDisplay currentUserProfile={currentUserProfile} />;
-    } else {
-      content = <h5>No workorders on file</h5>;
-    }
-  }
-  if (workorder) {
+    content = (
+      <Fragment>
+        <WorkorderDisplay currentUserProfile={currentUserProfile} />
+        <WorkorderCreate currentUserProfile={currentUserProfile} />
+      </Fragment>
+    );
+  } else {
     content = (
       <Fragment>
         <WorkorderDisplay currentUserProfile={currentUserProfile} />
         <h5>Admin Search options</h5>
-        <WorkorderCreate />
+        <WorkorderCreate currentUserProfile={currentUserProfile} />
       </Fragment>
     );
-  } else {
-    content = <WorkorderCreate />;
   }
   return content;
 };

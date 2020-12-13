@@ -11,13 +11,21 @@ module.exports = {
     const profiles = await Profile.find();
     res.json(profiles);
   },
-  createProfile: async ({ firstName, lastName, email, phone, password }) => {
+  createProfile: async ({
+    firstName,
+    lastName,
+    email,
+    phone,
+    password,
+    workorders,
+  }) => {
     const newProfile = new Profile({
       firstName,
       lastName,
       phone,
       email,
       password,
+      workorders,
     });
     const profile = await newProfile.save();
     return profile;

@@ -1,9 +1,10 @@
 import React, { Fragment, useContext } from "react";
 // import AuthContainer from "../../backend/authorization/AuthContainer";
 import { UserContext } from "../../backend/authorization/UserContext";
+import { Redirect } from "react-router-dom";
 
 function Header({ loginClick, setLoginClick }) {
-  const [currentUser] = useContext(UserContext);
+  const [currentUser, setCurrentUser] = useContext(UserContext);
 
   function toggleButton() {
     if (loginClick === false) {
@@ -11,6 +12,11 @@ function Header({ loginClick, setLoginClick }) {
     } else {
       setLoginClick(false);
     }
+  }
+
+  function logout() {
+    setCurrentUser(undefined);
+    toggleButton();
   }
 
   let content;
@@ -29,6 +35,7 @@ function Header({ loginClick, setLoginClick }) {
     content = (
       <Fragment>
         <h2>AERO</h2>
+        <button onClick={logout}>Logout</button>
       </Fragment>
     );
   }

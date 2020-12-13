@@ -47,9 +47,9 @@ const workorderSchema = new Schema(
     // },
     // parts: [],
   },
-  // {
-  //   timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
-  // }
+  {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  }
 );
 
 module.exports = workorderSchema;

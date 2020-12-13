@@ -42,7 +42,6 @@ const ProfileSearch = (props) => {
       <div className="profile__searchBox">
         <form onSubmit={searchProfiles}>
           <ContactEditor searchBy={searchBy} onChange={updateSearchField} />
-          {/* <SearchEditor value={value} searchBy={searchBy} onChange={updateSearchField} /> */}
           <input type="submit" value="Search" />
         </form>
       </div>

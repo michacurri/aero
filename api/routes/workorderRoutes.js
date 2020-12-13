@@ -1,20 +1,16 @@
 const express = require("express");
 const router = express.Router();
-
-// TODO
-// Require Models
-// const Profile = require("../models/profileModel");
 const Workorder = require("../models/workorderSchema");
+
+//! not in use currently
 
 // TODO
 // @route   GET/workorders
 // @desc    Returns all workorders
 // @access  Public
 router.get("/", async (req, res) => {
-  // Gets all documents from workorders
   try {
     const workorders = await Workorder.find();
-    // use express SYNTAX to retrieve the documents
     res.json(workorders);
   } catch (err) {
     res.json({ error: err });
@@ -78,6 +74,4 @@ router.patch("/:workorderId", (req, res) => {
     });
 });
 
-// TODO
-// Export router
 module.exports = router;

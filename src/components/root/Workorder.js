@@ -21,6 +21,7 @@ const Workorder = () => {
       <Fragment>
         <WorkorderDisplay currentUserProfile={currentUserProfile} />
         <h5>Admin Search options</h5>
+        {/* below here only because impersonator has not been fully set up */}
         <WorkorderCreate currentUserProfile={currentUserProfile} />
       </Fragment>
     );

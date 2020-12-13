@@ -1,12 +1,10 @@
 const express = require("express");
 const Profile = require("../models/profileModel");
-// const Workorder = require("../models/workorderSchema");
 const {
   createProfile,
   findProfileByEmail,
   findProfileById,
 } = require("../controllers/profileController");
-const { createWorkorder } = require("../controllers/workorderController");
 const { verifyToken } = require("../middleware/verifyToken");
 const { createToken } = require("../tokens/tokenService");
 
@@ -114,7 +112,6 @@ router
     try {
       console.log("I am here");
       const thisProfile = await Profile.findById(profileId);
-      console.log(thisProfile);
       if (!thisProfile) {
         res
           .status(400)

@@ -4,13 +4,11 @@ const path = require("path");
 require("dotenv/config");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-// const uri = process.env.MONGODB_URI;
-
-const uri = "mongodb://localhost:27017/aero";
-const PORT = 5000;
 const mongoose = require("mongoose");
 
-// app.use(express.json());
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
+const PORT = process.env.PORT || 5000;
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,36 +21,35 @@ app.use(
   })
 );
 
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then(() => {
-    console.log(`Successfully connected to database server ${uri}`);
-  })
-  .catch((err) => {
-    console.log({ error: err });
-  });
-
 // * EXPRESS ROUTER MINI-APP
 const profile = require("./api/routes/profileRoutes");
 const workorder = require("./api/routes/workorderRoutes");
 app.use("/profile", profile);
 app.use("/workorder", workorder);
 
-// ? changed original from 'build' to '/'
-// This serves all files placed in the /build
-// app.use(express.static("build"));
-app.use(express.static("/"));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('./build'));
+  // only add this part if you are using React Router
+  app.get('*', (req,res) =>{
+      console.log(path.join(__dirname+'/build/index.html'));
+      res.sendFile(path.join(__dirname+'/build/index.html'));
+  });
+}
 
-// ? removed 'build' from directory
-// This route serves your index.html file (which initializes React)
-app.get("*", function (req, res, next) {
-  // res.sendFile(path.join(__dirname, "build", "index.html"));
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+mongoose
+  .connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log(`Successfully connected to database server ${DB_URI}`);
+  })
+  .catch((err) => {
+    console.log({ error: err });
+  });
+
+app.use(express.static("/"));
 
 app.listen(PORT, function () {
   console.log(`Server is now listening on port ${PORT}!`);

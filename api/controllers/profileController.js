@@ -41,6 +41,7 @@ module.exports = {
         firstName: profile.firstName,
         lastName: profile.lastName,
         email: profile.email,
+        workorders: profile.workorders,
       };
     } catch (err) {
       throw err;

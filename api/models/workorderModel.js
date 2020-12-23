@@ -18,6 +18,10 @@ const { Schema } = mongoose;
 
 const workorderSchema = new Schema(
   {
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+    },
     // dateIn: {
     //   type: String,
     //   default: Date(),
@@ -52,5 +56,5 @@ const workorderSchema = new Schema(
   }
 );
 
-module.exports = workorderSchema;
+module.exports = mongoose.model("Workorder", workorderSchema);
 

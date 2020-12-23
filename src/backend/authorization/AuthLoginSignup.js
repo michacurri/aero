@@ -25,19 +25,21 @@ function AuthLoginSignup({ loadUserProfile }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(`${email} and ${password}`);
       const response = await fetch("/profile/login", {
         method: "POST",
         headers: headers,
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      console.log(data);
       if (!response.ok) {
         throw new Error(data.message);
       }
       loadUserProfile();
     } catch (err) {
       setError(err.message);
-      console.log(error);
+      console.log(`Here is the error: ${error}`);
     }
   };
 

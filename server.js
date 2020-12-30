@@ -6,12 +6,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 
-const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
-const PORT = process.env.PORT || 5000;
+// const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
+const DB_URI = "mongodb://localhost:27017/aero";
+const PORT = 5000;
 
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "http://localhost:5000",
@@ -24,13 +25,13 @@ app.use(
 // * EXPRESS ROUTER MINI-APP
 const profile = require("./api/routes/profileRoutes");
 const workorder = require("./api/routes/workorderRoutes");
-app.use("/profile", profile);
-app.use("/workorder", workorder);
+app.use("/api/profile", profile);
+app.use("/api/workorder", workorder);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('./build'));
   // only add this part if you are using React Router
-  app.get('*', (req,res) =>{
+  app.get('/*', (req,res) =>{
       console.log(path.join(__dirname+'/build/index.html'));
       res.sendFile(path.join(__dirname+'/build/index.html'));
   });

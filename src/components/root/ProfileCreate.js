@@ -20,7 +20,7 @@ function ProfileCreate({ changeLink }) {
   const addRecord = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/profile/create", {
+      const response = await fetch("/api/profile/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contact),

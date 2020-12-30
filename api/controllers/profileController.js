@@ -26,7 +26,10 @@ module.exports = {
   },
   findProfileByEmail: async (email) => {
     try {
-      const profileRes = await Profile.findOne({ email });
+      const profileRes = await Profile.findOne({ email })
+        .populate("workorders")
+        .exec();
+        console.log(`"profileRes.workorders": ${profileRes.workorders}`);
       return profileRes;
     } catch (err) {
       throw err;
@@ -34,7 +37,9 @@ module.exports = {
   },
   findProfileById: async (id) => {
     try {
-      const profile = await Profile.findById(id);
+      const profile = await Profile.findById(id)
+      .populate("workorders")
+      .exec();
       //* return everything but password
       return {
         id: profile._id,

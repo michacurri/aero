@@ -16,7 +16,7 @@ const AuthContainer = () => {
   const loadUserProfile = useCallback(
     async function () {
       try {
-        const response = await fetch("/profile/this", {
+        const response = await fetch("/api/profile/this-profile", {
           headers: {
             credentials: "include",
           },

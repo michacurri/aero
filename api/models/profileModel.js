@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
-const workorderSchema = require("./workorderSchema");
+// const workorderModel = require("./workorderModel");
 
 //___ profileSchema
 // contact:     contactSchema
@@ -30,8 +30,10 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
-    // OAuthUid: Number,
-    workorders: [workorderSchema],
+    workorders: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Workorder'
+    }] 
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },

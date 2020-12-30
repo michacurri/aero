@@ -25,7 +25,7 @@ function AuthLoginSignup({ loadUserProfile }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/profile/login", {
+      const response = await fetch("/api/profile/login", {
         method: "POST",
         headers: headers,
         body: JSON.stringify({ email, password }),
@@ -37,7 +37,6 @@ function AuthLoginSignup({ loadUserProfile }) {
       loadUserProfile();
     } catch (err) {
       setError(err.message);
-      console.log(error);
     }
   };
 

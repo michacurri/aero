@@ -1,5 +1,4 @@
 const express = require("express");
-const Profile = require("../models/profileModel");
 const {
   createProfile,
   findProfileByEmail,
@@ -9,7 +8,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 const { createToken } = require("../tokens/tokenService");
 
 const router = express.Router();
-router.get("/search/email/:email", findProfileByEmail);
+// router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
@@ -55,6 +54,7 @@ router.route("/create").post(async (req, res) => {
 });
 
 router.route("/login").post(async (req, res) => {
+  console.log("route: login");
   const { email, password } = req.body;
   if (!email || email === " ") {
     res.status(400).json({ message: "email must be provided" });
@@ -87,53 +87,13 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
-router
-  .use(verifyToken)
-  .route("/workorder/create/:profileId")
-  .post(async (req, res) => {
-    const { brand, model, colour } = req.body;
-    const { profileId } = req.params;
-    // if (!dateIn || dateIn === " ") {
-    //   res.status(400).json({ message: "dataIn must be provided" });
-    //   return;
-    // }
-    if (!brand || brand === " ") {
-      res.status(400).json({ message: "brand must be provided" });
-      return;
-    }
-    if (!model || model === " ") {
-      res.status(400).json({ message: "model must be provided" });
-      return;
-    }
-    if (!colour || colour === " ") {
-      res.status(400).json({ message: "colour must be provided" });
-      return;
-    }
-    try {
-      console.log("I am here");
-      const thisProfile = await Profile.findById(profileId);
-      if (!thisProfile) {
-        res
-          .status(400)
-          .json({ message: `a profile with this id does not exist` });
-      } else {
-
-        const workorder = { brand, model, colour };
-        thisProfile.workorders.push(workorder);
-        await thisProfile.save();
-
-        res.status(200).json({ data: { workorders: thisProfile.workorders } });
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  });
+// where workorder route used to be
 
 router
   .use(verifyToken)
-  .route("/this")
+  .route("/this-profile")
   .get(async (req, res) => {
+    console.log(`/this-profile: ${req.profile.id}`);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

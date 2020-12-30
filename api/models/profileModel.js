@@ -30,7 +30,6 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
-    // workorders: [workorderModel],
     workorders: [{
       type: Schema.Types.ObjectId,
       ref: 'Workorder'

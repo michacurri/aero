@@ -1,0 +1,41 @@
+h1 {
+  font-size: $h1FontSize;
+  color: #33415c;
+}
+h2 {
+  font-size: $h2FontSize;
+  color: #5c677d;
+}
+h3 {
+  font-size: $h3FontSize;
+  color: #f8f9fa;
+}
+h4 {
+  font-size: $h4FontSize;
+  color: black;
+}
+h5 {
+  font-size: $h5FontSize;
+  font-weight: bolder;
+  color: black;
+}
+h6 {
+  font-size: $h6FontSize;
+  font-weight: lighter;
+  color: #5c677d;
+}
+p {
+  font-size: $pFontSize;
+  color: black;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  font-size: $liFontSize;
+  color: black;
+}
+a {
+  font-size: $h6FontSize;
+  color: white;
+}

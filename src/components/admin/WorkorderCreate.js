@@ -13,15 +13,16 @@ const WorkorderAdd = ({ currentUserProfile }) => {
   const addRecord = async (e) => {
     e.preventDefault();
     try {
-      const profileId = currentUserProfile.id;
+      const userId = currentUserProfile.id;
       const { brand, model, colour } = workorder;
-      const response = await fetch(`/profile/workorder/create/${profileId}`, {
+      const response = await fetch(`/api/workorder/create/${userId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ brand, model, colour }),
       });
       if (response.ok) {
         // props.onAdd();
+        console.log(response);
       } else {
         console.log("Error saving record");
       }

@@ -8,7 +8,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 const { createToken } = require("../tokens/tokenService");
 
 const router = express.Router();
-router.get("/search/email/:email", findProfileByEmail);
+// router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
@@ -91,8 +91,9 @@ router.route("/login").post(async (req, res) => {
 
 router
   .use(verifyToken)
-  .route("/this")
+  .route("/this-profile")
   .get(async (req, res) => {
+    console.log(`/this-profile: ${req.profile.id}`);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

@@ -10,14 +10,14 @@ const { createWorkorder } = require("../controllers/workorderController");
 // @route   GET/workorders
 // @desc    Returns all workorders
 // @access  Public
-// router.get("/", async (req, res) => {
-//   try {
-//     const workorders = await Workorder.find();
-//     res.json(workorders);
-//   } catch (err) {
-//     res.json({ error: err });
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    const workorders = await Workorder.find();
+    res.json(workorders);
+  } catch (err) {
+    res.json({ error: err });
+  }
+});
 
 // TODO
 // @route   POST /api/workorders

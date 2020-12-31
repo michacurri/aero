@@ -20,43 +20,11 @@ const { createWorkorder } = require("../controllers/workorderController");
 // });
 
 // TODO
-// @route   POST /workorders
+// @route   POST /api/workorders
 // @desc    Add a new workorder
 // @access  Public
-// router.post("/create", async (req, res) => {
-//   // Create a new workorder from the information entered through req.body
-//   const {
-//     // dateIn,
-//     // dateOut,
-//     brand,
-//     model,
-//     colour,
-//     // service,
-//     // status,
-//     // parts,
-//   } = req.body;
+// router.post("/create/:userId", async (req, res) => {
 
-//   const newWorkorder = new Workorder({
-//     // dateIn,
-//     // dateOut,
-//     brand,
-//     model,
-//     colour,
-//     // service,
-//     // status,
-//     // parts,
-//   });
-
-//   try {
-//     const workorder = await newWorkorder.save();
-//     res.json(workorder);
-//   } catch (err) {
-//     res.json({ error: err });
-//   }
-// });
-
-// cut and pasted from profileRoutes.js
-// will need to be modified to not push, but create NEW
 router
   // .use(verifyToken)
   .route("/create/:userId")
@@ -80,7 +48,6 @@ router
       return;
     }
     try {
-      // const profile = await findProfileById(userId);
       const newWorkorder = await createWorkorder({
         // profile,
         userId,
@@ -93,18 +60,11 @@ router
         // status,
         // parts,
       });
-      // console.log(`|||| workorderRoutes:96 "newWorkorder": ${newWorkorder}`);
       res.status(200).json({ newWorkorder });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Internal server error" });
     }
-    // try {
-    //   const workorder = await newWorkorder.save();
-    //   res.json(workorder);
-    // } catch (err) {
-    //   res.json({ error: err });
-    // }
   });
 
 // TODO

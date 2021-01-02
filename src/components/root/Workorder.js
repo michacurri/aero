@@ -6,10 +6,10 @@ import WorkorderCreate from "../admin/WorkorderCreate";
 
 const Workorder = () => {
   const [currentProfile] = useContext(UserContext);
-  const [impersonator] = useContext(ImpersonatorContext);
+  const [admin] = useContext(ImpersonatorContext);
 
   let content;
-  if (!impersonator) {
+  if (!admin) {
     content = (
       <Fragment>
         <WorkorderDisplay currentProfile={currentProfile} />
@@ -21,7 +21,7 @@ const Workorder = () => {
       <Fragment>
         <WorkorderDisplay currentProfile={currentProfile} />
         <h5>Admin Search options</h5>
-        {/* below here only because impersonator has not been fully set up */}
+        {/* below here only because admin has not been fully set up */}
         <WorkorderCreate currentProfile={currentProfile} />
       </Fragment>
     );

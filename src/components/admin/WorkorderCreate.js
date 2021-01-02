@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import WorkorderEditor from "../root/WorkorderEditor";
 
-const WorkorderAdd = ({ currentUserProfile }) => {
+const WorkorderAdd = ({ currentProfile }) => {
   const [workorder, setWorkorder] = useState();
 
   const updateWorkorderField = (e) => {
@@ -13,7 +13,7 @@ const WorkorderAdd = ({ currentUserProfile }) => {
   const addRecord = async (e) => {
     e.preventDefault();
     try {
-      const userId = currentUserProfile.id;
+      const userId = currentProfile.id;
       const { brand, model, colour } = workorder;
       const response = await fetch(`/api/workorder/create/${userId}`, {
         method: "POST",

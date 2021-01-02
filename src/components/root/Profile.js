@@ -11,7 +11,7 @@ import { UserContext } from "../../backend/authorization/UserContext";
 // TODO - IF user is ADMIN show everything
 
 const Profile = () => {
-  const [impersonator] = useContext(ImpersonatorContext);
+  const [admin] = useContext(ImpersonatorContext);
   const [currentProfile, setCurrentProfile] = useContext(UserContext);
   const [searchOrAdd, setSearchOrAdd] = useState(null);
 
@@ -23,7 +23,7 @@ const Profile = () => {
   };
 
   let content;
-  if (impersonator) {
+  if (admin) {
     if (!currentProfile._id) {
       content = (
         <Fragment>

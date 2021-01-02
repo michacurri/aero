@@ -5,24 +5,24 @@ import WorkorderDisplay from "./WorkorderDisplay";
 import WorkorderCreate from "../admin/WorkorderCreate";
 
 const Workorder = () => {
-  const [currentUserProfile] = useContext(UserContext);
-  const [impersonator] = useContext(ImpersonatorContext);
+  const [currentProfile] = useContext(UserContext);
+  const [admin] = useContext(ImpersonatorContext);
 
   let content;
-  if (!impersonator) {
+  if (!admin) {
     content = (
       <Fragment>
-        <WorkorderDisplay currentUserProfile={currentUserProfile} />
-        <WorkorderCreate currentUserProfile={currentUserProfile} />
+        <WorkorderDisplay currentProfile={currentProfile} />
+        <WorkorderCreate currentProfile={currentProfile} />
       </Fragment>
     );
   } else {
     content = (
       <Fragment>
-        <WorkorderDisplay currentUserProfile={currentUserProfile} />
+        <WorkorderDisplay currentProfile={currentProfile} />
         <h5>Admin Search options</h5>
-        {/* below here only because impersonator has not been fully set up */}
-        <WorkorderCreate currentUserProfile={currentUserProfile} />
+        {/* below here only because admin has not been fully set up */}
+        <WorkorderCreate currentProfile={currentProfile} />
       </Fragment>
     );
   }

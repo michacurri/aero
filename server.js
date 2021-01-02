@@ -14,14 +14,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: "http://localhost:5000",
-//     credentials: true,
-//     exposedHeaders: ["Set-Cookie"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
+app.use(
+  cors({
+    origin: `https://aero-workorder-management.herokuapp.com:${process.env.PORT}`,
+    credentials: true,
+    exposedHeaders: ["Set-Cookie"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // * EXPRESS ROUTER MINI-APP
 const profile = require("./api/routes/profileRoutes");

@@ -10,11 +10,11 @@ import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 
 function MainContentSection({ loginClick }) {
-  const [currentUserProfile] = useContext(UserContext);
+  const [currentProfile] = useContext(UserContext);
 
   let content;
   if (loginClick) {
-    if (currentUserProfile) {
+    if (currentProfile) {
       content = (
         <div className="mainContentSection">
           <section id="sidebar__wrapper">
@@ -26,7 +26,7 @@ function MainContentSection({ loginClick }) {
               {/* prettier-ignore */}
               <Switch>
                 <Route path="/home" render={() => <Home />} />
-                <Route path="/profile" render={() => <Profile currentUserProfile={currentUserProfile} />} />
+                <Route path="/profile" render={() => <Profile currentProfile={currentProfile} />} />
                 <Route path="/workorder" render={() => <Workorder />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>

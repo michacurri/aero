@@ -16,9 +16,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function WorkorderDisplay({ currentUserProfile }) {
+export default function WorkorderDisplay({ currentProfile }) {
   const classes = useStyles();
-  const { workorders } = currentUserProfile;
+  const { workorders } = currentProfile;
     return (
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="workorder display table">

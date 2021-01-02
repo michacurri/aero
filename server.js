@@ -6,8 +6,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 
-// const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
-const DB_URI = "mongodb://localhost:27017/aero";
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
+// const DB_URI = "mongodb://localhost:27017/aero";
 const PORT = 5000;
 
 app.use(cookieParser());

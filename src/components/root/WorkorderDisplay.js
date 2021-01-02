@@ -1,20 +1,49 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 
-const WorkorderDisplay = ({ currentUserProfile }) => {
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
+export default function WorkorderDisplay({ currentUserProfile }) {
+  const classes = useStyles();
   const { workorders } = currentUserProfile;
-  console.log(workorders);
-  const allWorkorders = workorders.map((workorder, index) => {
     return (
-      <div key={index} className="workorderDisplay__eachWorkorder">
-        <ul id={workorder._id}>
-          <li>Brand: {workorder.brand}</li>
-          <li>Model: {workorder.model}</li>
-          <li>Colour: {workorder.colour}</li>
-        </ul>
-      </div>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="workorder display table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Workorder Number</TableCell>
+              <TableCell align="right">Brand</TableCell>
+              <TableCell align="right">Model</TableCell>
+              <TableCell align="right">Colour</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {workorders.map((workorder) => (
+              <TableRow key={workorder._id}>
+                <TableCell component="th" scope="workorder">
+                  {workorder._id}
+                </TableCell>
+                <TableCell align="right">{workorder.brand}</TableCell>
+                <TableCell align="right">{workorder.model}</TableCell>
+                <TableCell align="right">{workorder.colour}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
-  });
-  return allWorkorders;
-};
 
-export default WorkorderDisplay;
+}

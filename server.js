@@ -5,7 +5,7 @@ require("dotenv/config");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-
+// changed .env
 const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
 // const DB_URI = "mongodb://localhost:27017/aero";
 const PORT = process.env.PORT || 5000;

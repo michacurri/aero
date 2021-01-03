@@ -29,7 +29,7 @@ module.exports = {
       const profileRes = await Profile.findOne({ email })
         .populate("workorders")
         .exec();
-        console.log(`"profileRes.workorders": ${profileRes.workorders}`);
+        // console.log(`"profileRes.workorders": ${profileRes.workorders}`);
       return profileRes;
     } catch (err) {
       throw err;

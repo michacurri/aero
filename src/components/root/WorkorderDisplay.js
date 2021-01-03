@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
@@ -19,6 +19,11 @@ const useStyles = makeStyles({
 export default function WorkorderDisplay({ currentProfile }) {
   const classes = useStyles();
   const { workorders } = currentProfile;
+
+  useEffect(() => {
+    console.log('refresh');
+  }, [workorders])
+
     return (
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="workorder display table">

@@ -21,7 +21,7 @@ const WorkorderAdd = ({ currentProfile }) => {
         body: JSON.stringify({ brand, model, colour }),
       });
       if (response.ok) {
-        // props.onAdd();
+        // onNewWorkorder(response);
         console.log(response);
       } else {
         console.log("Error saving record");

@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: `https://aero-workorder-management.herokuapp.com:${process.env.PORT}`,
+    // origin: `https://aero-workorder-management.herokuapp.com`,
     credentials: true,
     exposedHeaders: ["Set-Cookie"],
     allowedHeaders: ["Content-Type", "Authorization"],

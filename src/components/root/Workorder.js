@@ -1,12 +1,12 @@
 import React, { useContext, Fragment, useState } from "react";
-import { UserContext } from "../../backend/authorization/UserContext";
-import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
+// import { UserContext } from "../../backend/authorization/UserContext";
+// import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
 import WorkorderDisplay from "./WorkorderDisplay";
 import WorkorderCreate from "../admin/WorkorderCreate";
 
-const Workorder = () => {
-  const [currentProfile] = useContext(UserContext);
-  const [admin] = useContext(ImpersonatorContext);
+const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
+  // const [currentProfile] = useContext(UserContext);
+  // const [admin] = useContext(ImpersonatorContext);
   const [workView, setWorkView] = useState("display");
 
   function workorderClick() {
@@ -29,7 +29,10 @@ const Workorder = () => {
         ) : (
           <Fragment>
             <button onClick={workorderClick}>View Workorders</button>
-            <WorkorderCreate currentProfile={currentProfile} />
+            <WorkorderCreate
+              currentProfile={currentProfile}
+              loadUserProfile={loadUserProfile}
+            />
           </Fragment>
         )}
       </Fragment>

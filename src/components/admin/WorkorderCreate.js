@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import WorkorderEditor from "../root/WorkorderEditor";
 
-const WorkorderAdd = ({ currentProfile }) => {
+const WorkorderAdd = ({ currentProfile, loadUserProfile }) => {
   const [workorder, setWorkorder] = useState();
 
   const updateWorkorderField = (e) => {
@@ -21,8 +21,7 @@ const WorkorderAdd = ({ currentProfile }) => {
         body: JSON.stringify({ brand, model, colour }),
       });
       if (response.ok) {
-        // onNewWorkorder(response);
-        console.log(response);
+        loadUserProfile()
       } else {
         console.log("Error saving record");
       }

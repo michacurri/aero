@@ -1,11 +1,23 @@
-import React, { useContext, useCallback } from "react";
-import { UserContext } from "./UserContext";
-import { ImpersonatorContext } from "./ImpersonatorContext";
-import AuthLoginSignup from "./AuthLoginSignup";
+import React, { Fragment, useContext, useCallback, useState } from "react";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
+import ProfileCreate from "../../components/root/ProfileCreate";
+import Field from "../../components/root/Field";
+// import { UserContext } from "./UserContext";
+// import { ImpersonatorContext } from "./ImpersonatorContext";
+// import AuthLoginSignup from "./AuthLoginSignup";
 
-const AuthContainer = () => {
-  const [currentUser, setCurrentUser] = useContext(UserContext);
-  const [impersonator, setImpersonator] = useContext(ImpersonatorContext);
+const headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
+
+const AuthContainer = ({loadUserProfile}) => {
+  // const [currentUser, setCurrentUser] = useContext(UserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [link, setLink] = useState("signup");
+  // const [impersonator, setImpersonator] = useContext(ImpersonatorContext);
 
   //* const loadImpersonator = useCallback(() => {
   //   setTimeout(() => {
@@ -13,29 +25,71 @@ const AuthContainer = () => {
   //   }, [3000]);
   // }, [setImpersonator]);
 
-  const loadUserProfile = useCallback(
-    async function () {
-      try {
-        const response = await fetch("/api/profile/this-profile", {
-          headers: {
-            credentials: "include",
-          },
-        });
-        const json = await response.json();
-        if (!response.ok) {
-          throw new Error(json.message);
-        }
-        setCurrentUser(json.data);
-      } catch (err) {
-        console.log(err);
-        setCurrentUser(undefined);
+  const changeLink = () => {
+    if (link === "signup") {
+      setLink("login");
+    } else {
+      setLink("signup");
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/profile/login", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
       }
-    },
-    [setCurrentUser]
-  );
+      loadUserProfile();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
-    <AuthLoginSignup loadUserProfile={loadUserProfile}
-    />
+    <Fragment>
+      <Redirect to="/login" />
+      <Switch>
+        <Route path="/login">
+          <div className="auth__loginForm">
+            <form onSubmit={handleSubmit} noValidate>
+              <Field
+                id="email"
+                label="Email Address"
+                name="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <Field
+                name="password"
+                label="Password"
+                id="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </Route>
+        <Route path="/signup">
+          <ProfileCreate changeLink={changeLink} />
+        </Route>
+      </Switch>
+      {/* prettier-ignore */}
+      <nav><ul>
+        <li><Link to={`${link}`} onClick={changeLink}>{`${link}`}</Link></li>
+      </ul></nav>
+    </Fragment>
   );
 };
 

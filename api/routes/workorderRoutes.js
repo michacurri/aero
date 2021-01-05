@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 // router.post("/create/:userId", async (req, res) => {
 
 router
-  // .use(verifyToken)
+  .use(verifyToken)
   .route("/create/:userId")
   .post(async (req, res) => {
     const { brand, model, colour } = req.body;

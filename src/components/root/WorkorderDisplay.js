@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 });
 
 export default function WorkorderDisplay({ currentProfile }) {
+  console.log(currentProfile);
   const classes = useStyles();
   const { workorders } = currentProfile;
 

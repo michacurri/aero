@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ContactEditor from "./ContactEditor";
 import { useHistory } from "react-router-dom";
 
+const headers = { "Content-Type": "application/json" };
+
 function ProfileCreate({ changeLink }) {
   const [contact, setContact] = useState();
   const history = useHistory();
@@ -22,7 +24,7 @@ function ProfileCreate({ changeLink }) {
     try {
       const response = await fetch("/api/profile/create", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: headers,
         body: JSON.stringify(contact),
       });
       const data = await response.json();

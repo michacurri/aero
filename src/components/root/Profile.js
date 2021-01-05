@@ -1,18 +1,14 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import ProfileDisplay from "./ProfileDisplay";
-import ProfileCreate from './ProfileCreate';
-import ProfileSearch from './ProfilesSearch'
-import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
-import { UserContext } from "../../backend/authorization/UserContext";
+import ProfileCreate from "./ProfileCreate";
+import ProfileSearch from "./ProfilesSearch";
 
 //  _______ Profile
 // Return two buttons that control whether to Sign In or Sign Up or add
 // On Login check if currentProfile exists in DB
 // TODO - IF user is ADMIN show everything
 
-const Profile = () => {
-  const [admin] = useContext(ImpersonatorContext);
-  const [currentProfile, setCurrentProfile] = useContext(UserContext);
+const Profile = ({ admin, currentProfile, setCurrentProfile }) => {
   const [searchOrAdd, setSearchOrAdd] = useState(null);
 
   const searchProfiles = () => {
@@ -38,10 +34,7 @@ const Profile = () => {
             </div>
           ) : (
             <div className="profile__addBox">
-              <ProfileCreate
-                currentProfile={currentProfile}
-                setCurrentProfile={setCurrentProfile}
-              />
+              <ProfileCreate />
             </div>
           )}
         </Fragment>

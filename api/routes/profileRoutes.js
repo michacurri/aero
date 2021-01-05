@@ -93,7 +93,7 @@ router
   .use(verifyToken)
   .route("/this-profile")
   .get(async (req, res) => {
-    console.log(`/this-profile: ${req.profile.id}`);
+    // console.log(`/this-profile: ${req.profile.id}`);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

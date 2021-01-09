@@ -57,3 +57,75 @@ const ContactEditor = ({
   </ul>
 );
 export default ContactEditor;
+
+
+
+
+
+
+// import React, { Fragment } from "react";
+// import TextField from "@material-ui/core/TextField";
+// import { makeStyles } from "@material-ui/core/styles";
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(1),
+//     },
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(1),
+//       width: "25ch",
+//     },
+//   },
+// }));
+
+// const ContactEditor = ({
+//   firstName,
+//   lastName,
+//   phone,
+//   email,
+//   password,
+//   onChange,
+// }) => {
+//   const classes = useStyles();
+//   return (
+//     <Fragment>
+//       <TextField
+//         name="firstName"
+//         id="standard-name"
+//         label="First Name"
+//         value={firstName ?? " "}
+//         onChange={onChange}
+//       />
+//       <TextField
+//         name="lastName"
+//         id="standard-name"
+//         label="Last Name"
+//         value={lastName ?? " "}
+//         onChange={onChange}
+//       />
+//       <TextField
+//         name="phone"
+//         id="standard-name"
+//         label="Phone"
+//         value={phone ?? " "}
+//         onChange={onChange}
+//       />
+//       <TextField
+//         name="email"
+//         id="standard-name"
+//         label="Email"
+//         value={email ?? " "}
+//         onChange={onChange}
+//       />
+//       <TextField
+//         name="password"
+//         id="standard-name"
+//         label="Password"
+//         value={password ?? " "}
+//         onChange={onChange}
+//       />
+//     </Fragment>
+//   );
+// };
+// export default ContactEditor;

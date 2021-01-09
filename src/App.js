@@ -5,26 +5,30 @@ import MainContentSection from "./components/root/MainContentSection";
 import Footer from "./components/root/Footer";
 import { ImpersonatorProvider } from "./backend/authorization/ImpersonatorContext";
 import { UserProvider } from "./backend/authorization/UserContext";
+import { ThemeProvider } from "@material-ui/core";
+import theme from './styles/theme'
 
 const App = () => {
   const [loginClick, setLoginClick] = useState(false);
 
   return (
-    <ImpersonatorProvider>
-      <UserProvider>
-        <Router>
-          <header className="header__container">
-            <Header loginClick={loginClick} setLoginClick={setLoginClick} />
-          </header>
-          <main>
-            <MainContentSection loginClick={loginClick} />
-          </main>
-          <footer className="main__footer">
-            <Footer />
-          </footer>
-        </Router>
-      </UserProvider>
-    </ImpersonatorProvider>
+    <ThemeProvider theme={theme}>
+      <ImpersonatorProvider>
+        <UserProvider>
+          <Router>
+            <header className="header__container">
+              <Header loginClick={loginClick} setLoginClick={setLoginClick} />
+            </header>
+            <main>
+              <MainContentSection loginClick={loginClick} />
+            </main>
+            <footer className="main__footer">
+              <Footer />
+            </footer>
+          </Router>
+        </UserProvider>
+      </ImpersonatorProvider>
+    </ThemeProvider>
   );
 };
 

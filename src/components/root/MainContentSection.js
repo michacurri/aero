@@ -14,8 +14,6 @@ function MainContentSection({ loginClick }) {
   const [admin, setAdmin] = useContext(ImpersonatorContext);
   const [currentProfile, setCurrentProfile] = useContext(UserContext);
 
-
-
   const loadUserProfile = useCallback(
     async function () {
       try {
@@ -36,12 +34,6 @@ function MainContentSection({ loginClick }) {
     },
     [setCurrentProfile]
   );
-
-  // function loadUserProfile() {
-
-  //   const prevWorkorders = currentProfile.workorders;
-  //   console.log(`prev: ${prevWorkorders} & new: ${workorders}`);
-  // }
 
   let content;
   if (loginClick) {

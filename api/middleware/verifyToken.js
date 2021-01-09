@@ -1,7 +1,6 @@
 const { verifyToken } = require("../tokens/tokenService");
 
 exports.verifyToken = async (req, res, next) => {
-  console.log(req.cookies);
   const { cookies } = req;
   try {
     if (!cookies || !cookies.token) {

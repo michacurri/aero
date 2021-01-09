@@ -1,12 +1,8 @@
-import React, { useContext, Fragment, useState } from "react";
-// import { UserContext } from "../../backend/authorization/UserContext";
-// import { ImpersonatorContext } from "../../backend/authorization/ImpersonatorContext";
+import React, { Fragment, useState } from "react";
 import WorkorderDisplay from "./WorkorderDisplay";
 import WorkorderCreate from "../admin/WorkorderCreate";
 
 const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
-  // const [currentProfile] = useContext(UserContext);
-  // const [admin] = useContext(ImpersonatorContext);
   const [workView, setWorkView] = useState("display");
 
   function workorderClick() {

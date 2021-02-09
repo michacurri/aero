@@ -25,10 +25,12 @@ const profileSchema = new Schema(
       type: String,
       required: true,   
       unique: true,
+      match: /^.+@.+$/,
     },
     password: {
       type: String,
       required: true,
+      minlength: 8, 
     },
     workorders: [{
       type: Schema.Types.ObjectId,

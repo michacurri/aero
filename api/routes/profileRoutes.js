@@ -11,6 +11,9 @@ const router = express.Router();
 // router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
+  //! console.log
+  console.log("create endpoint reached")
+  //! 
   const { firstName, lastName, email, phone, password } = req.body;
   if (!firstName || firstName === " ") {
     res.status(400).json({ message: "firstName must be provided" });
@@ -30,7 +33,7 @@ router.route("/create").post(async (req, res) => {
   }
   if (!password || password === " ") {
     res.status(400).json({ message: "password must be provided" });
-    return;
+    return; 
   }
   try {
     const profile = await findProfileByEmail(email);

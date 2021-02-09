@@ -7,19 +7,20 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 
 const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/aero";
+// const DB_URI = "mongodb://localhost:27017/aero";
 const PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:3000/" || "https://aero-workorder-management.herokuapp.com",
-    credentials: true,
-    exposedHeaders: ["Set-Cookie"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000/" || "https://aero-workorder-management.herokuapp.com",
+//     credentials: true,
+//     exposedHeaders: ["Set-Cookie"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
 // * EXPRESS ROUTER MINI-APP
 const profile = require("./api/routes/profileRoutes");

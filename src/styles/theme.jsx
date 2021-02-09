@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core";
 
 // import { deepPurple, amber } from "@material-ui/core/colors";
 

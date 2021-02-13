@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     maxWidth: "calc(50% - 16px)",
     flexGrow: "50%",
-    flexBasis: "200px"
-  }
+    flexBasis: "200px",
+  },
 }));
 
 const AuthContainer = ({ loadUserProfile }) => {
@@ -76,6 +76,7 @@ const AuthContainer = ({ loadUserProfile }) => {
       loadUserProfile();
     } catch (err) {
       setError(err.message);
+      console.log(error);
     }
   };
 

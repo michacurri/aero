@@ -11,7 +11,7 @@ import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 
 function MainContentSection({ loginClick }) {
-  const [admin, setAdmin] = useContext(ImpersonatorContext);
+  const [admin] = useContext(ImpersonatorContext);
   const [currentProfile, setCurrentProfile] = useContext(UserContext);
 
   const loadUserProfile = useCallback(

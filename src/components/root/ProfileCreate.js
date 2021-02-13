@@ -1,6 +1,6 @@
 // import ContactEditor from "./ContactEditor";
 // import { sizing } from "@material-ui/system";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import InputMask from "react-input-mask";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,16 +49,17 @@ function ProfileCreate({ changeLink }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [prePass, setPrePass] = useState();
-
+  const phoneRef = useRef(null);
+  
   const strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
-  );
-  const emailRegex = new RegExp(
-    "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/"
-  );
-
-  const checkPasswordStrength = () => {
-    if (!strongRegex.test(prePass)) {
+    );
+    const emailRegex = new RegExp(
+      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/"
+      );
+      
+      const checkPasswordStrength = () => {
+        if (!strongRegex.test(prePass)) {
       console.log(
         "password must be greater than 8 characters; contain 1 number; 1 uppercase letter; and 1 special character"
         );
@@ -70,15 +72,19 @@ function ProfileCreate({ changeLink }) {
     let name = e.target.name;
     if (name === "firstName") {
       setFirstName(e.target.value);
+      console.log(firstName);
     }
     if (name === "lastName") {
       setLastName(e.target.value);
+      console.log(lastName);
     }
     if (name === "phone") {
       setPhone(e.target.value);
+      console.log(phone);
     }
     if (name === "email") {
       setEmail(e.target.value);
+      console.log(email);
     }
     if (name === "password") {
       setPrePass(e.target.value);
@@ -92,6 +98,7 @@ function ProfileCreate({ changeLink }) {
   const addRecord = async (e) => {
     e.preventDefault();
     const contact = { firstName, lastName, phone, email, password };
+    console.log(contact);
     try {
       const response = await fetch("/api/profile/create", {
         method: "POST",
@@ -124,7 +131,7 @@ function ProfileCreate({ changeLink }) {
       <form
         onSubmit={addRecord}
         className={classes.root}
-        noValidate
+        // noValidate
         autoComplete="off"
         autoFocus={true}
       >
@@ -189,13 +196,14 @@ function ProfileCreate({ changeLink }) {
                       shrink: true,
                     }}
                     required
+                    ref={phoneRef}
                   />
                 )}
               </InputMask>
               {/* <TextField
                 className={classes.textField}
                 name="phone"
-                id="standard-name"
+                // id="standard-name"
                 label="Phone"
                 value={phone ?? " "}
                 onChange={updateFields}

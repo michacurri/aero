@@ -222,7 +222,7 @@ export default function WorkorderDisplay({ currentProfile }) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const [dense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { workorders } = currentProfile;
 
@@ -308,9 +308,7 @@ export default function WorkorderDisplay({ currentProfile }) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) =>
-                        handleClick(event, workorder._id)
-                      }
+                      onClick={(event) => handleClick(event, workorder._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}

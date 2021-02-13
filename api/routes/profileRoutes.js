@@ -11,6 +11,7 @@ const router = express.Router();
 // router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
+  console.log(`we're here at create!`)
   const { firstName, lastName, email, phone, password } = req.body;
   if (!firstName || firstName === " ") {
     res.status(400).json({ message: "firstName must be provided" });

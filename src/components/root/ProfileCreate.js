@@ -38,8 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const headers = { "Content-Type": "application/json" };
-
 function ProfileCreate({ changeLink }) {
   const classes = useStyles();
   const history = useHistory();
@@ -54,28 +52,34 @@ function ProfileCreate({ changeLink }) {
     console.log(name);
     if (name === "firstName") {
       setFirstName(e.target.value);
+      console.log(firstName);
     }
     if (name === "lastName") {
       setLastName(e.target.value);
+      console.log(lastName);
     }
     if (name === "phone") {
       setPhone(e.target.value);
+      console.log(phone);
     }
     if (name === "email") {
       setEmail(e.target.value);
+      console.log(email);
     }
     if (name === "password") {
       setPassword(e.target.value);
+      console.log(password);
     } else;
   };
 
   const addRecord = async (e) => {
     e.preventDefault();
     const contact = { firstName, lastName, phone, email, password };
+    console.log(contact);
     try {
       const response = await fetch("/api/profile/create", {
         method: "POST",
-        headers: headers,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contact),
       });
       const data = await response.json();
@@ -103,7 +107,7 @@ function ProfileCreate({ changeLink }) {
       <form
         onSubmit={addRecord}
         className={classes.root}
-        noValidate
+        // noValidate
         autoComplete="off"
         autoFocus={true}
       >
@@ -113,7 +117,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 className={classes.textField}
                 name="firstName"
-                id="standard-name"
+                // id="standard-name"
                 label="First Name"
                 value={firstName ?? " "}
                 onChange={updateFields}
@@ -132,7 +136,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 className={classes.textField}
                 name="lastName"
-                id="standard-name"
+                // id="standard-name"
                 label="Last Name"
                 value={lastName ?? " "}
                 onChange={updateFields}
@@ -151,7 +155,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 className={classes.textField}
                 name="phone"
-                id="standard-name"
+                // id="standard-name"
                 label="Phone"
                 value={phone ?? " "}
                 onChange={updateFields}
@@ -170,7 +174,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 className={classes.textField}
                 name="email"
-                id="standard-name"
+                // id="standard-name"
                 label="Email"
                 value={email ?? " "}
                 onChange={updateFields}
@@ -191,7 +195,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 className={classes.textField}
                 name="password"
-                id="standard-name"
+                // id="standard-name"
                 label="Password"
                 value={password ?? " "}
                 onChange={updateFields}

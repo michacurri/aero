@@ -1,14 +1,12 @@
 // import ContactEditor from "./ContactEditor";
 // import { sizing } from "@material-ui/system";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import InputMask from "react-input-mask";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,52 +46,61 @@ function ProfileCreate({ changeLink }) {
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [prePass, setPrePass] = useState();
-  const phoneRef = useRef(null);
-  
-  const strongRegex = new RegExp(
-    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
-    );
-    const emailRegex = new RegExp(
-      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/"
-      );
-      
-      const checkPasswordStrength = () => {
-        if (!strongRegex.test(prePass)) {
-      console.log(
-        "password must be greater than 8 characters; contain 1 number; 1 uppercase letter; and 1 special character"
-        );
-      } else {
-      setPassword(prePass);
-    }
-  };
+  const [errors, setErrors] = useState({
+    emailErr: false,
+    emailErrHelper: "",
+    passErr: false,
+    passErrHelper: "",
+  });
 
   const updateFields = (e) => {
-    let name = e.target.name;
+    const {
+      target: { name, value },
+    } = e;
     if (name === "firstName") {
-      setFirstName(e.target.value);
-      console.log(firstName);
+      setFirstName(value);
     }
     if (name === "lastName") {
-      setLastName(e.target.value);
-      console.log(lastName);
+      setLastName(value);
     }
     if (name === "phone") {
-      setPhone(e.target.value);
-      console.log(phone);
+      setPhone(value);
     }
     if (name === "email") {
-      setEmail(e.target.value);
-      console.log(email);
+      setEmail(value);
+      setErrors({ emailErr: false });
+      if (!emailRegex.test(value)) {
+        setErrors({
+          emailErr: true,
+          emailErrHelper: "please enter a valid email",
+        });
+      }
     }
     if (name === "password") {
-      setPrePass(e.target.value);
-      checkPasswordStrength();
-      //* ^^ working, but it needs to display
-      //* on the form - how to do this?
-      // setPassword(e.target.value);
+      setPassword(value);
+      setErrors({ passErr: false });
+      if (!passRegex.test(value)) {
+        setErrors({
+          passErr: true,
+          passErrHelper:
+            "must contain 1 special character; 1 number; and 1 capitalized letter",
+        });
+      }
     } else;
   };
+
+  //?   REGEX STRINGS
+  const passRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+  const emailRegex = new RegExp(
+    // eslint-disable-next-line
+    `(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})`
+  );
+  const phoneRegex = new RegExp(
+    "^([0-9]{2})?(([0-9]{2}))([0-9]{3}|[0-9]{4})-[0-9]{4}$"
+  );
+  //? ///////////////
 
   const addRecord = async (e) => {
     e.preventDefault();
@@ -105,7 +112,7 @@ function ProfileCreate({ changeLink }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contact),
       });
-      console.log(response)
+      console.log(response);
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message);
@@ -128,22 +135,17 @@ function ProfileCreate({ changeLink }) {
 
   return (
     <Paper className={classes.paper}>
-      <form
-        onSubmit={addRecord}
-        className={classes.root}
-        // noValidate
-        autoComplete="off"
-        autoFocus={true}
-      >
+      <form onSubmit={addRecord} className={classes.root} autoComplete="off">
         <Grid container className={classes.root}>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
+                type="text"
                 className={classes.textField}
                 name="firstName"
-                // id="standard-name"
+                id="standard-name"
                 label="First Name"
-                value={firstName ?? " "}
+                value={firstName || ""}
                 onChange={updateFields}
                 style={{ margin: 8 }}
                 fullWidth
@@ -152,17 +154,19 @@ function ProfileCreate({ changeLink }) {
                   shrink: true,
                 }}
                 required
+                autoFocus
               />
             </Paper>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
+                type="text"
                 className={classes.textField}
                 name="lastName"
-                // id="standard-name"
+                id="standard-name"
                 label="Last Name"
-                value={lastName ?? " "}
+                value={lastName || ""}
                 onChange={updateFields}
                 style={{ margin: 8 }}
                 fullWidth
@@ -176,37 +180,15 @@ function ProfileCreate({ changeLink }) {
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
-              <InputMask
-                mask="999-999-9999"
-                disabled={false}
-                maskChar=" "
-                value={phone ?? " "}
+              <TextField
+                type="tel"
+                value={phone || ""}
+                pattern={phoneRegex}
                 onChange={updateFields}
-              >
-                {() => (
-                  <TextField
-                    className={classes.textField}
-                    name="phone"
-                    // id="standard-name"
-                    label="Phone"
-                    style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    required
-                    ref={phoneRef}
-                  />
-                )}
-              </InputMask>
-              {/* <TextField
                 className={classes.textField}
                 name="phone"
-                // id="standard-name"
+                id="standard-required"
                 label="Phone"
-                value={phone ?? " "}
-                onChange={updateFields}
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
@@ -214,18 +196,18 @@ function ProfileCreate({ changeLink }) {
                   shrink: true,
                 }}
                 required
-              /> */}
+              />
             </Paper>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
+                type="email"
                 className={classes.textField}
                 name="email"
-                type="email"
-                // id="standard-name"
+                id="standard-name"
                 label="Email"
-                value={email ?? " "}
+                value={email || ""}
                 pattern={emailRegex}
                 onChange={updateFields}
                 style={{ margin: 8 }}
@@ -235,21 +217,21 @@ function ProfileCreate({ changeLink }) {
                   shrink: true,
                 }}
                 required
-                // error
-                // helperText="must be an email"
+                error={errors?.emailErr}
+                helperText={errors?.emailErrHelper}
               />
             </Paper>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
+                type="password"
+                id="standard-password-input"
                 className={classes.textField}
                 name="password"
-                // id="standard-name"
                 label="Password"
-                value={prePass ?? " "}
-                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
-                // pattern={strongRegex}
+                value={password || ""}
+                pattern={passRegex}
                 onChange={updateFields}
                 style={{ margin: 8 }}
                 fullWidth
@@ -258,6 +240,8 @@ function ProfileCreate({ changeLink }) {
                   shrink: true,
                 }}
                 required
+                error={errors?.passErr}
+                helperText={errors?.passErrHelper}
               />
             </Paper>
           </Grid>

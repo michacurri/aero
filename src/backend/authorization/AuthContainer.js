@@ -96,6 +96,7 @@ const AuthContainer = ({ loadUserProfile }) => {
               <Grid item className={classes.grid}>
                 <Paper className={classes.paperText}>
                   <TextField
+                    autoFocus
                     id="email"
                     label="Email Address"
                     name="email"

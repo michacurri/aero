@@ -134,9 +134,6 @@ const AuthContainer = ({ loadUserProfile }) => {
       </Switch>
       {/* prettier-ignore */}
       <nav>
-        {/* <ul>
-          <li><Link to={`${link}`} onClick={changeLink}>{`${link}`}</Link></li>
-        </ul> */}
         <Button component={Link} to={`${link}`} onClick={changeLink} variant="outlined" color="primary" >{`${link}`}</Button>
       </nav>
     </Fragment>

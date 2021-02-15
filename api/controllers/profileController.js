@@ -6,6 +6,7 @@ const Profile = require("../models/profileModel");
 
 module.exports = {
   createProfile: async ({
+    admin,
     firstName,
     lastName,
     email,
@@ -14,6 +15,7 @@ module.exports = {
     workorders,
   }) => {
     const newProfile = new Profile({
+      admin,
       firstName,
       lastName,
       phone,
@@ -42,6 +44,7 @@ module.exports = {
       //* return everything but password
       return {
         id: profile._id,
+        admin: profile.admin,
         firstName: profile.firstName,
         lastName: profile.lastName,
         email: profile.email,

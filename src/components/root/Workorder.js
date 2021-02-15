@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
+const Workorder = ({ admin, currentProfile, loadUserProfile }) => {
   const classes = useStyles();
   const [workView, setWorkView] = useState("display");
 
@@ -34,7 +34,7 @@ const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
   }
 
   let content;
-  if (!admin) {
+  if (admin) {
     content = (
       <Fragment>
         {workView === "display" ? (
@@ -52,7 +52,9 @@ const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
             <WorkorderCreate
               currentProfile={currentProfile}
               loadUserProfile={loadUserProfile}
-            />
+              />
+              <h5>Admin Search options</h5>
+              {/* below here only because admin has not been fully set up */}
           </Fragment>
         )}
       </Fragment>
@@ -61,9 +63,6 @@ const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
     content = (
       <Fragment>
         <WorkorderDisplay currentProfile={currentProfile} />
-        <h5>Admin Search options</h5>
-        {/* below here only because admin has not been fully set up */}
-        <WorkorderCreate currentProfile={currentProfile} />
       </Fragment>
     );
   }

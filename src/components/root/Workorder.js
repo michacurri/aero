@@ -1,8 +1,28 @@
 import React, { Fragment, useState } from "react";
 import WorkorderDisplay from "./WorkorderDisplay";
 import WorkorderCreate from "../admin/WorkorderCreate";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    flexGrow: 1,
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  button: {
+    backgroundColor: "#558564",
+    color: "#E0E0E0",
+    padding: "2rem",
+  },
+}));
 
 const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
+  const classes = useStyles();
   const [workView, setWorkView] = useState("display");
 
   function workorderClick() {
@@ -19,12 +39,16 @@ const Workorder = ({ currentProfile, loadUserProfile, admin }) => {
       <Fragment>
         {workView === "display" ? (
           <Fragment>
-            <button onClick={workorderClick}>Create new Workorder</button>
+            <Button className={classes.button} onClick={workorderClick}>
+              Create new Workorder
+            </Button>
             <WorkorderDisplay currentProfile={currentProfile} />
           </Fragment>
         ) : (
           <Fragment>
-            <button onClick={workorderClick}>View Workorders</button>
+            <Button className={classes.button} onClick={workorderClick}>
+              View Workorders
+            </Button>
             <WorkorderCreate
               currentProfile={currentProfile}
               loadUserProfile={loadUserProfile}

@@ -97,6 +97,7 @@ const AuthContainer = ({ loadUserProfile }) => {
                 <Paper className={classes.paperText}>
                   <TextField
                     autoFocus
+                    type="email"
                     id="email"
                     label="Email Address"
                     name="email"
@@ -110,6 +111,7 @@ const AuthContainer = ({ loadUserProfile }) => {
               <Grid className={classes.grid}>
                 <Paper className={classes.paperText}>
                   <TextField
+                    type="password"
                     name="password"
                     label="Password"
                     id="password"

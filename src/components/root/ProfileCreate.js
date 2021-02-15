@@ -1,4 +1,3 @@
-// import ContactEditor from "./ContactEditor";
 // import { sizing } from "@material-ui/system";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -47,6 +46,8 @@ function ProfileCreate({ changeLink }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState({
+    phoneErr: false,
+    phoneErrHelper: "",
     emailErr: false,
     emailErrHelper: "",
     passErr: false,
@@ -68,39 +69,69 @@ function ProfileCreate({ changeLink }) {
     }
     if (name === "email") {
       setEmail(value);
-      setErrors({ emailErr: false });
-      if (!emailRegex.test(value)) {
-        setErrors({
-          emailErr: true,
-          emailErrHelper: "please enter a valid email",
-        });
-      }
     }
     if (name === "password") {
       setPassword(value);
-      setErrors({ passErr: false });
       if (!passRegex.test(value)) {
         setErrors({
           passErr: true,
           passErrHelper:
             "must contain 1 special character; 1 number; and 1 capitalized letter",
         });
+      } else {
+        setErrors({
+          passErr: false,
+        });
       }
     } else;
   };
 
-  //?   REGEX STRINGS
+  const onBlurValidate = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    if (name === "phone") {
+      if (!phoneRegex.test(value)) {
+        console.log(value);
+        setErrors({
+          phoneErr: true,
+          phoneErrHelper: "please enter a valid phone number",
+        });
+      } else {
+        console.log("phone: passed");
+        setErrors({
+          phoneErr: false,
+        });
+      }
+    } else if (name === "email") {
+      setErrors({ emailErr: false });
+      if (!emailRegex.test(value)) {
+        setErrors({
+          emailErr: true,
+          emailErrHelper: "please enter a valid email",
+        });
+      } else {
+        setErrors({ emailErr: false });
+      }
+    }
+  };
+
+  // prettier-ignore
   const passRegex = new RegExp(
+    // eslint-disable-next-line
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
+  // prettier-ignore
   const emailRegex = new RegExp(
     // eslint-disable-next-line
     `(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})`
   );
+  // prettier-ignore
   const phoneRegex = new RegExp(
-    "^([0-9]{2})?(([0-9]{2}))([0-9]{3}|[0-9]{4})-[0-9]{4}$"
+    // eslint-disable-next-line
+    "^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$"
+    // "^(?:\([2-9]\d{2}\)\ ?|[2-9]\d{2}(?:\-?|\ ?))[2-9]\d{2}[- ]?\d{4}$"
   );
-  //? ///////////////
 
   const addRecord = async (e) => {
     e.preventDefault();
@@ -140,13 +171,17 @@ function ProfileCreate({ changeLink }) {
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
-                type="text"
-                className={classes.textField}
+                id="firstName"
                 name="firstName"
-                id="standard-name"
-                label="First Name"
+                label={firstName ? "First Name" : null}
                 value={firstName || ""}
+                inputProps={{
+                  "aria-label": "Input for first name",
+                  maxLength: 50,
+                }}
                 onChange={updateFields}
+                placeholder="First Name"
+                className={classes.textField}
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
@@ -161,13 +196,17 @@ function ProfileCreate({ changeLink }) {
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
-                type="text"
-                className={classes.textField}
+                id="lastName"
                 name="lastName"
-                id="standard-name"
-                label="Last Name"
+                label={lastName ? "Last Name" : null}
                 value={lastName || ""}
+                inputProps={{
+                  "aria-label": "Input for last name",
+                  maxLength: 50,
+                }}
                 onChange={updateFields}
+                placeholder="Last Name"
+                className={classes.textField}
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
@@ -182,20 +221,28 @@ function ProfileCreate({ changeLink }) {
             <Paper className={classes.paperText}>
               <TextField
                 type="tel"
-                value={phone || ""}
-                pattern={phoneRegex}
-                onChange={updateFields}
-                className={classes.textField}
+                id="phone"
                 name="phone"
-                id="standard-required"
-                label="Phone"
+                label={phone ? "Phone Number" : null}
+                value={phone || ""}
+                onChange={updateFields}
+                placeholder="Telephone Number"
+                className={classes.textField}
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
+                inputProps={{
+                  "aria-label": "Input for phone number",
+                  maxLength: 10,
+                }}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 required
+                pattern={phoneRegex}
+                error={errors?.phoneErr}
+                helperText={errors?.phoneErrHelper}
+                onBlur={onBlurValidate}
               />
             </Paper>
           </Grid>
@@ -203,34 +250,43 @@ function ProfileCreate({ changeLink }) {
             <Paper className={classes.paperText}>
               <TextField
                 type="email"
-                className={classes.textField}
+                id="email"
                 name="email"
-                id="standard-name"
-                label="Email"
+                label={email ? "Email Address" : null}
                 value={email || ""}
-                pattern={emailRegex}
                 onChange={updateFields}
+                placeholder="Email Address"
+                className={classes.textField}
                 style={{ margin: 8 }}
                 fullWidth
                 margin="normal"
+                inputProps={{ "aria-label": "Input for email address" }}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 required
+                pattern={emailRegex}
                 error={errors?.emailErr}
                 helperText={errors?.emailErrHelper}
+                onBlur={onBlurValidate}
               />
             </Paper>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paperText}>
               <TextField
+                id="password"
                 type="password"
-                id="standard-password-input"
+                placeholder="must contain 1 special character; 1 number; and 1 capitalized letter"
                 className={classes.textField}
                 name="password"
-                label="Password"
+                label={password ? "Password" : null}
                 value={password || ""}
+                inputProps={{
+                  "aria-label":
+                    "Input for password. Password must contain one special character; one number; and one capitalized letter",
+                  minLength: 8,
+                }}
                 pattern={passRegex}
                 onChange={updateFields}
                 style={{ margin: 8 }}
@@ -245,15 +301,17 @@ function ProfileCreate({ changeLink }) {
               />
             </Paper>
           </Grid>
-          <Button
-            className={classes.submit}
-            variant="outlined"
-            color="primary"
-            type="submit"
-            value="Save"
-          >
-            Submit
-          </Button>
+          {!errors.phoneErr && !errors.emailErr && !errors.passErr ? (
+            <Button
+              className={classes.submit}
+              variant="outlined"
+              color="primary"
+              type="submit"
+              value="Save"
+            >
+              Submit
+            </Button>
+          ) : null}
         </Grid>
       </form>
     </Paper>

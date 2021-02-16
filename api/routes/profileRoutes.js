@@ -3,12 +3,12 @@ const {
   createProfile,
   findProfileByEmail,
   findProfileById,
+  findProfileByAny,
 } = require("../controllers/profileController");
 const { verifyToken } = require("../middleware/verifyToken");
 const { createToken } = require("../tokens/tokenService");
 
 const router = express.Router();
-// router.get("/search/email/:email", findProfileByEmail);
 
 router.route("/create").post(async (req, res) => {
   const { firstName, lastName, email, phone, password } = req.body;
@@ -30,7 +30,7 @@ router.route("/create").post(async (req, res) => {
   }
   if (!password || password === " ") {
     res.status(400).json({ message: "password must be provided" });
-    return; 
+    return;
   }
   try {
     const profile = await findProfileByEmail(email);
@@ -86,13 +86,32 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
-// where workorder route used to be
+router.route("/search/:inputValue").get(async (req, res) => {
+  const { inputValue } = req.params;
+  if (!inputValue || inputValue === "") {
+    res.status(400).json({ message: "nothing to search" });
+    return;
+  } else {
+    try {
+      const match = await findProfileByAny(inputValue);
+      if (!match) {
+        res
+          .status(400)
+          .json({ message: `no profiles found for: ${inputValue}` });
+        return;
+      }
+      res.status(200).json({ data });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+});
 
 router
   .use(verifyToken)
   .route("/this-profile")
   .get(async (req, res) => {
-    // console.log(`/this-profile: ${req.profile.id}`);
     try {
       const profile = await findProfileById(req.profile.id);
       res.json({ data: profile });

@@ -1,50 +1,160 @@
-import React, { useState, Fragment } from "react";
-import ContactEditor from "../root/ContactEditor";
+import React, { useState, Fragment, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import IconButton from "@material-ui/core/IconButton";
+import CheckSharpIcon from "@material-ui/icons/CheckSharp";
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    flexGrow: 1,
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  Input: {
+    marginLEft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: "75%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  paper: {
+    display: "flex",
+    width: "90%",
+    margin: "0 auto",
+    padding: 1,
+    rounded: false,
+  },
+  paperText: {
+    rounded: false,
+    padding: 1,
+  },
+}));
 
 const ProfileSearch = (props) => {
-  const [searchBy, setSearchBy] = useState(null);
-  const [value, setValue] = useState({});
+  const classes = useStyles();
+  const [searchValue, setSearchValue] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
+  const [toggleCreate, setToggleCreate] = useState(false);
 
   const updateSearchField = (e) => {
-    const searchQuery = { ...value };
-    searchQuery[e.target.name] = e.target.value;
-    console.log(searchQuery);
-    setValue(searchQuery);
+    const {
+      target: { value },
+    } = e;
+    setSearchValue(value);
+    console.log(value);
   };
 
+  // TODO setTimeout() delay fn after (n)seconds from last keystroke
   const searchProfiles = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/profile/search/${searchBy}/${value}`, {
+      const response = await fetch(`/api/profile/search/${searchValue}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
       if (response.ok) {
-        props.onAdd();
+        const data = await response.json();
+        setSearchResults(data);
       } else {
-        console.log("Error when saving record");
+        console.log("Search returned no results");
       }
     } catch (e) {
       console.log(e);
     }
   };
 
-  const searchByMemberId = () => setSearchBy("memberId");
-  const SearchByPhone = () => setSearchBy("phone");
-  const searchByEmail = () => setSearchBy("email");
+  useEffect(() => {
+    setToggleCreate(false);
+  }, []);
 
   return (
     <Fragment>
-      <h3>Search By:</h3>
-      <button onClick={searchByMemberId}>Member ID</button>
-      <button onClick={SearchByPhone}>Phone Number</button>
-      <button onClick={searchByEmail}>Email Address</button>
-      <div className="profile__searchBox">
-        <form onSubmit={searchProfiles}>
-          <ContactEditor searchBy={searchBy} onChange={updateSearchField} />
-          <input type="submit" value="Search" />
+      <Paper className={classes.paper}>
+        <form
+          onSubmit={searchProfiles}
+          className={classes.root}
+          autoComplete="off"
+        >
+          <Grid container className={classes.root}>
+            <Grid item xs={10}>
+              <Paper className={classes.paperText}>
+                <Input
+                  onChange={updateSearchField}
+                  placeholder="search by email, first, or last name"
+                ></Input>
+              </Paper>
+            </Grid>
+          </Grid>
         </form>
-      </div>
+      </Paper>
+
+      {searchResults
+        ? searchResults.map((searchResult) => {
+            const {
+              _id,
+              firstName,
+              lastName,
+              email,
+              phone,
+              workorders,
+            } = searchResult;
+            const userProfile = {
+              _id,
+              firstName,
+              lastName,
+              email,
+              phone,
+              workorders,
+            };
+            return (
+              <Grid key={_id} container className={classes.root}>
+                <Grid item xs={10}>
+                  <Paper className={classes.paperText}>
+                    <List>
+                      <ListItem>
+                        <ListItemText
+                          primary={`${firstName} ${lastName}`}
+                          secondary={`${email}`}
+                        />
+                        <ListItemSecondaryAction>
+                          <IconButton
+                            edge="end"
+                            aria-label="check icon"
+                            onClick={() => props.setCurrentProfile(userProfile)}
+                          >
+                            <CheckSharpIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    </List>
+                  </Paper>
+                </Grid>
+              </Grid>
+            );
+          })
+        : null}
+      {toggleCreate && (
+        <Button
+          className={classes.submit}
+          variant="outlined"
+          color="primary"
+          type="submit"
+          value="Save"
+          //TODO onClick={} to create new Profile
+          //TODO maybe create <Route path="/profile" render={() =>
+        >Create New Profile</Button>
+      )}
     </Fragment>
   );
 };

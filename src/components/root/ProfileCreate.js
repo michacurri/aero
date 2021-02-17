@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     display: "flex",
-    width: "50%",
+    width: "75%",
     margin: "0 auto",
     padding: 1,
     rounded: false,
@@ -276,7 +276,7 @@ function ProfileCreate({ changeLink }) {
               <TextField
                 id="password"
                 type="password"
-                placeholder="must contain 1 special character; 1 number; and 1 capitalized letter"
+                placeholder="Password"
                 className={classes.textField}
                 name="password"
                 label={password ? "Password" : null}

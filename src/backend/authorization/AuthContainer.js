@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     maxWidth: "calc(50% - 16px)",
     flexGrow: "50%",
-    flexBasis: "200px"
-  }
+    flexBasis: "200px",
+  },
 }));
 
 const AuthContainer = ({ loadUserProfile }) => {
@@ -76,6 +76,7 @@ const AuthContainer = ({ loadUserProfile }) => {
       loadUserProfile();
     } catch (err) {
       setError(err.message);
+      console.log(error);
     }
   };
 
@@ -95,6 +96,8 @@ const AuthContainer = ({ loadUserProfile }) => {
               <Grid item className={classes.grid}>
                 <Paper className={classes.paperText}>
                   <TextField
+                    autoFocus
+                    type="email"
                     id="email"
                     label="Email Address"
                     name="email"
@@ -108,6 +111,7 @@ const AuthContainer = ({ loadUserProfile }) => {
               <Grid className={classes.grid}>
                 <Paper className={classes.paperText}>
                   <TextField
+                    type="password"
                     name="password"
                     label="Password"
                     id="password"
@@ -130,9 +134,6 @@ const AuthContainer = ({ loadUserProfile }) => {
       </Switch>
       {/* prettier-ignore */}
       <nav>
-        {/* <ul>
-          <li><Link to={`${link}`} onClick={changeLink}>{`${link}`}</Link></li>
-        </ul> */}
         <Button component={Link} to={`${link}`} onClick={changeLink} variant="outlined" color="primary" >{`${link}`}</Button>
       </nav>
     </Fragment>

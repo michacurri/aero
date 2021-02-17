@@ -1,12 +1,12 @@
 import React, { Fragment, useContext } from "react";
 import { UserContext } from "../../backend/authorization/UserContext";
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button'
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 // import theme from '../../styles/theme'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -35,9 +35,23 @@ function Header({ loginClick, setLoginClick }) {
       <Fragment>
         <h2>AERO</h2>
         {loginClick ? (
-          <Button variant="outlined" color="secondary" onClick={toggleLoginClick}>Close</Button>
+          <Button
+            className={classes.root}
+            variant="outlined"
+            color="secondary"
+            onClick={toggleLoginClick}
+          >
+            Close
+          </Button>
         ) : (
-          <Button variant="outlined" color="secondary" onClick={toggleLoginClick}>Login / Signup</Button>
+          <Button
+            className={classes.root}
+            variant="outlined"
+            color="secondary"
+            onClick={toggleLoginClick}
+          >
+            Login / Signup
+          </Button>
         )}
       </Fragment>
     );
@@ -45,7 +59,9 @@ function Header({ loginClick, setLoginClick }) {
     content = (
       <Fragment>
         <h2>AERO</h2>
-        <Button variant="outlined" color="secondary" onClick={logout}>Logout</Button>
+        <Button variant="outlined" color="secondary" onClick={logout}>
+          Logout
+        </Button>
       </Fragment>
     );
   }

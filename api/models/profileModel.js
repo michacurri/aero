@@ -9,6 +9,11 @@ const { Schema } = mongoose;
 
 const profileSchema = new Schema(
   {
+    admin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     firstName: {
       type: String,
       required: true,
@@ -20,20 +25,28 @@ const profileSchema = new Schema(
     phone: {
       type: Number,
       required: true,
+      minlength: 10,
+      maxlength: 11,
+      match: /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/,
     },
     email: {
       type: String,
-      required: true,   
+      required: true,
       unique: true,
+      match: /^.+@.+$/,
     },
     password: {
       type: String,
       required: true,
+      minlength: 8,
+      match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
     },
-    workorders: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Workorder'
-    }] 
+    workorders: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Workorder",
+      },
+    ],
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },

@@ -86,21 +86,23 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
-router.route("/search/:inputValue").get(async (req, res) => {
-  const { inputValue } = req.params;
-  if (!inputValue || inputValue === "") {
+router
+.route("/search/:searchValue")
+.get(async (req, res) => {
+  const { searchValue } = req.params;
+  if (!searchValue || searchValue === "") {
     res.status(400).json({ message: "nothing to search" });
     return;
   } else {
     try {
-      const match = await findProfileByAny(inputValue);
+      const match = await findProfileByAny(searchValue);
       if (!match) {
         res
           .status(400)
-          .json({ message: `no profiles found for: ${inputValue}` });
+          .json({ message: `Search for "${searchValue}" returned no results` });
         return;
       }
-      res.status(200).json({ data });
+      res.status(200).json(match);
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Internal server error" });

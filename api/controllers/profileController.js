@@ -54,7 +54,15 @@ module.exports = {
   },
   findProfileByAny: async (inputValue) => {
     try {
-      const profileRes = await Profile.findOne({ inputValue })
+      const profileRes = await Profile.find({
+        $or: [
+          { firstName: inputValue },
+          { lastName: inputValue },
+          { email: inputValue },
+          // TODO - mongoose.js CastError: Cast to number failed for value
+          // { phone: inputValue },
+        ],
+      })
         .populate("workorders")
         .exec();
       return profileRes;

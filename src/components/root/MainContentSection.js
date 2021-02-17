@@ -28,7 +28,7 @@ function MainContentSection({ loginClick }) {
         }
         if (json.data.admin === true) {
           setAdmin(json.data);
-          setCurrentProfile(json.data)
+          setCurrentProfile(json.data);
         } else {
           setCurrentProfile(json.data);
         }
@@ -54,7 +54,7 @@ function MainContentSection({ loginClick }) {
               {/* prettier-ignore */}
               <Switch>
                 <Route path="/home" render={() => <Home />} />
-                <Route path="/profile" render={() => <Profile admin={admin} currentProfile={currentProfile} />} />
+                <Route path="/profile" render={() => <Profile admin={admin} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>} />
                 <Route path="/workorder" render={() => <Workorder admin={admin} currentProfile={currentProfile} loadUserProfile={loadUserProfile} />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>

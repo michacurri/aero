@@ -6,7 +6,7 @@ import Footer from "./components/root/Footer";
 import { ImpersonatorProvider } from "./backend/authorization/ImpersonatorContext";
 import { UserProvider } from "./backend/authorization/UserContext";
 import { ThemeProvider } from "@material-ui/core";
-import theme from './styles/theme'
+import theme from "./styles/theme";
 
 const App = () => {
   const [loginClick, setLoginClick] = useState(false);
@@ -16,9 +16,7 @@ const App = () => {
       <ImpersonatorProvider>
         <UserProvider>
           <Router>
-            <header className="header__container">
               <Header loginClick={loginClick} setLoginClick={setLoginClick} />
-            </header>
             <main>
               <MainContentSection loginClick={loginClick} />
             </main>

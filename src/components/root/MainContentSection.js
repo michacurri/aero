@@ -9,8 +9,47 @@ import Workorder from "./Workorder";
 import Settings from "../admin/Settings";
 import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    flexGrow: 1,
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  main: {
+    display: "flex",
+    width: "90%",
+    maxWidth: "1200px",
+    margin: "0 auto",
+    height: "100%",
+  },
+  sidebarWrapper: {
+    width: "calc(100% / 4)",
+    height: "100%",
+    padding: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    backgroundColor: "deepskyblue",
+  },
+  mainContentWrapper: {
+    width: "calc(100% / 4 * 3)",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    backgroundColor: "#5c677d",
+  },
+}));
 
 function MainContentSection({ loginClick }) {
+  const classes = useStyles();
   const [admin, setAdmin] = useContext(ImpersonatorContext);
   const [currentProfile, setCurrentProfile] = useContext(UserContext);
 
@@ -44,11 +83,11 @@ function MainContentSection({ loginClick }) {
   if (loginClick) {
     if (admin) {
       content = (
-        <div className="mainContentSection">
-          <section id="sidebar__wrapper">
+        <div className={classes.main}>
+          <section className={classes.sidebarWrapper}>
             <SidebarNav />
           </section>
-          <section id="mainContent__wrapper">
+          <section className={classes.mainContentWrapper}>
             <div className="mainContent">
               <Redirect to="/home" render={() => <Home />} />
               {/* prettier-ignore */}

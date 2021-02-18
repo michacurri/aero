@@ -293,9 +293,18 @@ p {
   color: black;
 }
 
+ul {
+  list-style-type: none;
+}
+
 li {
   font-size: 2rem;
   color: black;
+}
+
+a {
+  font-size: 1.6rem;
+  color: white;
 }
 
 main {
@@ -309,21 +318,6 @@ section {
 
 button {
   padding: 1rem;
-}
-
-.header__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 15vh;
-  padding: 2rem;
-  background-color: #212529;
 }
 
 .advertHero__container {
@@ -407,47 +401,5 @@ button {
 
 .mainContent .form__wrapper {
   height: calc(100% / 4 * 3);
-}
-
-.mainContentSection {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 100%;
-}
-
-.mainContentSection #sidebar__wrapper {
-  width: calc(100% / 4);
-  height: 100%;
-  padding: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  background-color: deepskyblue;
-}
-
-.mainContentSection #mainContent__wrapper {
-  width: calc(100% / 4 * 3);
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  background-color: #5c677d;
 }
 /*# sourceMappingURL=index.css.map */

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  main: {
+  Main: {
     display: "flex",
     width: "90%",
     maxWidth: "1200px",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     backgroundColor: "deepskyblue",
   },
-  mainContentWrapper: {
+  main__wrapper: {
     width: "calc(100% / 4 * 3)",
     height: "100%",
     display: "flex",
@@ -83,11 +83,11 @@ function MainContentSection({ loginClick }) {
   if (loginClick) {
     if (admin) {
       content = (
-        <div className={classes.main}>
+        <main className={classes.Main}>
           <section className={classes.sidebarWrapper}>
             <SidebarNav />
           </section>
-          <section className={classes.mainContentWrapper}>
+          <section className={classes.main__wrapper}>
             <div className="mainContent">
               <Redirect to="/home" render={() => <Home />} />
               {/* prettier-ignore */}
@@ -99,7 +99,7 @@ function MainContentSection({ loginClick }) {
               </Switch>
             </div>
           </section>
-        </div>
+        </main>
       );
     } else if (!admin && currentProfile) {
       content = (

@@ -45,7 +45,7 @@ function Header({ loginClick, setLoginClick }) {
   }
 
   let content;
-  if (!currentUser || !admin) {
+  if (!currentUser && !admin) {
     content = (
       <header className={classes.Header}>
         <div className={classes.header__container}>
@@ -77,7 +77,12 @@ function Header({ loginClick, setLoginClick }) {
       <header className={classes.Header}>
         <div className={classes.header__container}>
           <h2>AERO</h2>
-          <Button variant="outlined" color="secondary" onClick={logout}>
+          <Button
+            className={classes.root}
+            variant="outlined"
+            color="secondary"
+            onClick={logout}
+          >
             Logout
           </Button>
         </div>

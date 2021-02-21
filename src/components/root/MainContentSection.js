@@ -6,6 +6,7 @@ import Home from "./Home";
 import SidebarNav from "./SidebarNav";
 import Profile from "./Profile";
 import Workorder from "./Workorder";
+import Services from "../admin/Services";
 import Settings from "../admin/Settings";
 import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
@@ -96,6 +97,7 @@ function MainContentSection({ loginClick }) {
                 <Route path="/home" render={() => <Home />} />
                 <Route path="/profile" render={() => <Profile admin={admin} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>} />
                 <Route path="/workorder" render={() => <Workorder admin={admin} currentProfile={currentProfile} loadUserProfile={loadUserProfile} />} />
+                <Route path="/services" render={() => <Services />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>
           </div>

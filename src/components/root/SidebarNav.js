@@ -10,7 +10,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import FingerprintSharpIcon from "@material-ui/icons/FingerprintSharp";
 import HomeSharpIcon from "@material-ui/icons/HomeSharp";
 import AssignmentSharpIcon from "@material-ui/icons/AssignmentSharp";
+import DirectionsBikeSharpIcon from '@material-ui/icons/DirectionsBikeSharp';
 import TuneSharpIcon from "@material-ui/icons/TuneSharp";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,63 +32,65 @@ function SidebarNav() {
   let content;
   if (admin) {
     content = (
-      <List
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        className={classes.root}
-      >
-        <ListItem button component={Link} to={"/home"}>
-          <ListItemIcon>
-            <HomeSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button component={Link} to={"/profile"}>
-          <ListItemIcon>
-            <FingerprintSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profiles" />
-        </ListItem>
-        <ListItem button component={Link} to={"/workorder"}>
-          <ListItemIcon>
-            <AssignmentSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Workorders" />
-        </ListItem>
-        <ListItem button component={Link} to={"/settings"}>
-          <ListItemIcon>
-            <TuneSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItem>
-      </List>
+      <Paper elevation={3} className={classes.root}>
+        <List component="nav" aria-labelledby="nested-list-subheader">
+          <ListItem button component={Link} to={"/home"}>
+            <ListItemIcon>
+              <HomeSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component={Link} to={"/profile"}>
+            <ListItemIcon>
+              <FingerprintSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profiles" />
+          </ListItem>
+          <ListItem button component={Link} to={"/workorder"}>
+            <ListItemIcon>
+              <AssignmentSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Workorders" />
+          </ListItem>
+          <ListItem button component={Link} to={"/services"}>
+            <ListItemIcon>
+              <DirectionsBikeSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Services" />
+          </ListItem>
+          <ListItem button component={Link} to={"/settings"}>
+            <ListItemIcon>
+              <TuneSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItem>
+        </List>
+      </Paper>
     );
   } else {
     content = (
-      <List
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        className={classes.root}
-      >
-        <ListItem button component={Link} to={"/home"}>
-          <ListItemIcon>
-            <HomeSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button component={Link} to={"/profile"}>
-          <ListItemIcon>
-            <FingerprintSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profiles" />
-        </ListItem>
-        <ListItem button component={Link} to={"/workorder"}>
-          <ListItemIcon>
-            <AssignmentSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Workorders" />
-        </ListItem>
-      </List>
+      <Paper elevation={3} className={classes.root}>
+        <List component="nav" aria-labelledby="nested-list-subheader">
+          <ListItem button component={Link} to={"/home"}>
+            <ListItemIcon>
+              <HomeSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component={Link} to={"/profile"}>
+            <ListItemIcon>
+              <FingerprintSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profiles" />
+          </ListItem>
+          <ListItem button component={Link} to={"/workorder"}>
+            <ListItemIcon>
+              <AssignmentSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary="Workorders" />
+          </ListItem>
+        </List>
+      </Paper>
     );
   }
 

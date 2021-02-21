@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import FingerprintSharpIcon from "@material-ui/icons/FingerprintSharp";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,24 +20,48 @@ const ProfileDisplay = ({ currentProfile }) => {
   const { firstName, lastName, phone, email } = currentProfile;
   return (
     <Fragment>
-      <List
-        // component="nav"
-        aria-labelledby="nested-list-subheader"
-        className={classes.root}
-      >
-        <ListItemIcon>
-          <FingerprintSharpIcon />
-        </ListItemIcon>
-        <ListItemText primary={firstName} />
-      </List>
-      {/* <div className="profile__contact">
-        <ul>
-          <li>{firstName}</li>
-          <li>{lastName}</li>
-          <li>{phone}</li>
-          <li>{email}</li>
-        </ul>
-      </div> */}
+      <Paper elevation={3} square={true} >
+        <List
+          // component="nav"
+          aria-labelledby="nested-list-subheader"
+          className={classes.root}
+        >
+          <ListItemIcon>
+            <FingerprintSharpIcon />
+          </ListItemIcon>
+          <ListItemText primary={firstName} />
+        </List>
+        <List
+          // component="nav"
+          aria-labelledby="nested-list-subheader"
+          className={classes.root}
+        >
+          <ListItemIcon>
+            <FingerprintSharpIcon />
+          </ListItemIcon>
+          <ListItemText primary={lastName} />
+        </List>
+        <List
+          // component="nav"
+          aria-labelledby="nested-list-subheader"
+          className={classes.root}
+        >
+          <ListItemIcon>
+            <FingerprintSharpIcon />
+          </ListItemIcon>
+          <ListItemText primary={phone} />
+        </List>
+        <List
+          // component="nav"
+          aria-labelledby="nested-list-subheader"
+          className={classes.root}
+        >
+          <ListItemIcon>
+            <FingerprintSharpIcon />
+          </ListItemIcon>
+          <ListItemText primary={email} />
+        </List>
+      </Paper>
     </Fragment>
   );
 };

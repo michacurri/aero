@@ -26,8 +26,10 @@ app.use(
 // * EXPRESS ROUTER MINI-APP
 const profile = require("./api/routes/profileRoutes");
 const workorder = require("./api/routes/workorderRoutes");
+const services = require("./api/routes/serviceRoutes");
 app.use("/api/profile", profile);
 app.use("/api/workorder", workorder);
+app.use("/api/services", services);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("./build"));
@@ -55,4 +57,3 @@ mongoose
   .catch((err) => {
     console.log({ error: err });
   });
-

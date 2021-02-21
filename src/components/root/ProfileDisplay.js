@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+// import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import FingerprintSharpIcon from "@material-ui/icons/FingerprintSharp";
@@ -20,42 +20,26 @@ const ProfileDisplay = ({ currentProfile }) => {
   const { firstName, lastName, phone, email } = currentProfile;
   return (
     <Fragment>
-      <Paper elevation={3} square={true} >
-        <List
-          // component="nav"
-          aria-labelledby="nested-list-subheader"
-          className={classes.root}
-        >
+      <Paper elevation={3} square={true}>
+        <List aria-labelledby="nested-list-subheader" className={classes.root}>
           <ListItemIcon>
             <FingerprintSharpIcon />
           </ListItemIcon>
           <ListItemText primary={firstName} />
         </List>
-        <List
-          // component="nav"
-          aria-labelledby="nested-list-subheader"
-          className={classes.root}
-        >
+        <List aria-labelledby="nested-list-subheader" className={classes.root}>
           <ListItemIcon>
             <FingerprintSharpIcon />
           </ListItemIcon>
           <ListItemText primary={lastName} />
         </List>
-        <List
-          // component="nav"
-          aria-labelledby="nested-list-subheader"
-          className={classes.root}
-        >
+        <List aria-labelledby="nested-list-subheader" className={classes.root}>
           <ListItemIcon>
             <FingerprintSharpIcon />
           </ListItemIcon>
           <ListItemText primary={phone} />
         </List>
-        <List
-          // component="nav"
-          aria-labelledby="nested-list-subheader"
-          className={classes.root}
-        >
+        <List aria-labelledby="nested-list-subheader" className={classes.root}>
           <ListItemIcon>
             <FingerprintSharpIcon />
           </ListItemIcon>

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     width: "90%",
-    margin: "0 auto",
+    margin: "1rem auto",
     padding: 1,
     rounded: false,
   },

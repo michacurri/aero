@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+    flexDirection: "column",
+    alignItems: "center",
   },
   textField: {
     marginLEft: theme.spacing(1),
@@ -25,14 +27,17 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     display: "flex",
-    width: "75%",
+    width: "80%",
     margin: "0 auto",
-    padding: 1,
+    padding: "3rem 0",
     rounded: false,
   },
   paperText: {
     rounded: false,
     padding: 1,
+  },
+  grid__items: {
+    width: "100%",
   },
 }));
 
@@ -167,7 +172,7 @@ function ProfileCreate({ changeLink }) {
     <Paper className={classes.paper}>
       <form onSubmit={addRecord} className={classes.root} autoComplete="off">
         <Grid container className={classes.root}>
-          <Grid item xs={10}>
+        <Grid item xs={10} className={classes.grid__items}>
             <Paper className={classes.paperText}>
               <TextField
                 id="firstName"
@@ -192,7 +197,7 @@ function ProfileCreate({ changeLink }) {
               />
             </Paper>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.grid__items}>
             <Paper className={classes.paperText}>
               <TextField
                 id="lastName"
@@ -216,7 +221,7 @@ function ProfileCreate({ changeLink }) {
               />
             </Paper>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.grid__items}>
             <Paper className={classes.paperText}>
               <TextField
                 type="tel"
@@ -245,7 +250,7 @@ function ProfileCreate({ changeLink }) {
               />
             </Paper>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.grid__items}>
             <Paper className={classes.paperText}>
               <TextField
                 type="email"
@@ -271,7 +276,7 @@ function ProfileCreate({ changeLink }) {
               />
             </Paper>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} className={classes.grid__items}>
             <Paper className={classes.paperText}>
               <TextField
                 id="password"

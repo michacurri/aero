@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    flexGrow: 1,
+    // flexGrow: 1,
     "& > *": {
       margin: theme.spacing(1),
     },
@@ -40,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "calc(50% - 16px)",
     flexGrow: "50%",
     flexBasis: "200px",
+  },
+  auth__button__container: {
+    display: "flex",
+    flexDirection: "column",
+    "& Button": {
+      marginBottom: "1rem",
+    },
   },
 }));
 
@@ -123,19 +130,24 @@ const AuthContainer = ({ loadUserProfile }) => {
                 </Paper>
               </Grid>
             </Grid>
-            <Button variant="outlined" color="primary" type="submit">
-              Login
-            </Button>
+            <div className={classes.auth__button__container}>
+              <Button variant="outlined" color="primary" type="submit">
+                Login
+              </Button>
+              <Button
+                component={Link}
+                to={`${link}`}
+                onClick={changeLink}
+                variant="outlined"
+                color="primary"
+              >{`${link}`}</Button>
+            </div>
           </form>
         </Route>
         <Route path="/signup">
           <ProfileCreate changeLink={changeLink} />
         </Route>
       </Switch>
-      {/* prettier-ignore */}
-      <nav>
-        <Button component={Link} to={`${link}`} onClick={changeLink} variant="outlined" color="primary" >{`${link}`}</Button>
-      </nav>
     </Fragment>
   );
 };

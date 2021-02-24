@@ -21,11 +21,16 @@ const theme = createMuiTheme({
   overrides: {
     MuiInputBase: {
       input: {
-        width: "45vw",
+        width: "100%",
+      },
+    },
+    MuiInput: {
+      root: {
+        width: "100%",
       },
     },
     //   MuiPaper: {
-    //     maxWidth: '500px',
+    //     padding: '3rem 0',
     //   },
   },
 });

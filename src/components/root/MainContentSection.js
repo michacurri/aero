@@ -6,29 +6,32 @@ import Home from "./Home";
 import SidebarNav from "./SidebarNav";
 import Profile from "./Profile";
 import Workorder from "./Workorder";
+import Services from "../admin/Services";
 import Settings from "../admin/Settings";
 import AdvertHero from "./AdvertHero";
 import AuthContainer from "../../backend/authorization/AuthContainer";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    flexGrow: 1,
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  Main: {
-    display: "flex",
-    width: "90%",
+  // root: {
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  //   justifyContent: "center",
+  //   // flexGrow: 1,
+  //   "& > *": {
+  //     margin: theme.spacing(1),
+  //   },
+  //   backgroundColor: theme.palette.primary.dark,
+  // },
+  main__section__wrapper: {
+    height: "100%",
+    width: "100%",
     maxWidth: "1200px",
     margin: "0 auto",
-    height: "100%",
+    display: "flex",
+    backgroundColor: "#5c677d",
   },
-  sidebarWrapper: {
+  sidebar__wrapper: {
     width: "calc(100% / 4)",
     height: "100%",
     padding: "1rem",
@@ -38,13 +41,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     backgroundColor: "deepskyblue",
   },
-  main__wrapper: {
-    width: "calc(100% / 4 * 3)",
+  main__content: {
     height: "100%",
+    width: "calc(100% / 4 * 3)",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    backgroundColor: "#5c677d",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 }));
 
@@ -64,12 +66,13 @@ function MainContentSection({ loginClick }) {
         const json = await response.json();
         if (!response.ok) {
           throw new Error(json.message);
-        }
-        if (json.data.admin === true) {
-          setAdmin(json.data);
-          setCurrentProfile(json.data);
         } else {
-          setCurrentProfile(json.data);
+          if (json.data.admin === true) {
+            setAdmin(json.data);
+            setCurrentProfile(json.data);
+          } else {
+            setCurrentProfile(json.data);
+          }
         }
       } catch (err) {
         console.log(err);
@@ -83,42 +86,39 @@ function MainContentSection({ loginClick }) {
   if (loginClick) {
     if (admin) {
       content = (
-        <main className={classes.Main}>
-          <section className={classes.sidebarWrapper}>
+        <section className={classes.main__section__wrapper}>
+          <div className={classes.sidebar__wrapper}>
             <SidebarNav />
-          </section>
-          <section className={classes.main__wrapper}>
-            <div className="mainContent">
-              <Redirect to="/home" render={() => <Home />} />
-              {/* prettier-ignore */}
-              <Switch>
+          </div>
+          <div className={classes.main__content}>
+            <Redirect to="/home" render={() => <Home />} />
+            {/* prettier-ignore */}
+            <Switch>
                 <Route path="/home" render={() => <Home />} />
                 <Route path="/profile" render={() => <Profile admin={admin} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>} />
                 <Route path="/workorder" render={() => <Workorder admin={admin} currentProfile={currentProfile} loadUserProfile={loadUserProfile} />} />
+                <Route path="/services" render={() => <Services />} />
                 <Route path="/settings" render={() => <Settings />} />
               </Switch>
-            </div>
-          </section>
-        </main>
+          </div>
+        </section>
       );
     } else if (!admin && currentProfile) {
       content = (
-        <div className="mainContentSection">
-          <section id="sidebar__wrapper">
+        <section className={classes.main__section__wrapper}>
+          <div className={classes.sidebar__wrapper}>
             <SidebarNav />
-          </section>
-          <section id="mainContent__wrapper">
-            <div className="mainContent">
-              <Redirect to="/home" render={() => <Home />} />
-              {/* prettier-ignore */}
-              <Switch>
+          </div>
+          <div className={classes.main__content}>
+            <Redirect to="/home" render={() => <Home />} />
+            {/* prettier-ignore */}
+            <Switch>
                 <Route path="/home" render={() => <Home />} />
                 <Route path="/profile" render={() => <Profile admin={admin} currentProfile={currentProfile} />} />
                 <Route path="/workorder" render={() => <Workorder admin={admin} currentProfile={currentProfile} loadUserProfile={loadUserProfile} />} />
               </Switch>
-            </div>
-          </section>
-        </div>
+          </div>
+        </section>
       );
     } else {
       content = <AuthContainer loadUserProfile={loadUserProfile} />;
@@ -127,7 +127,7 @@ function MainContentSection({ loginClick }) {
     content = (
       <Fragment>
         <Redirect exact to="/" />
-        <AdvertHero />;
+        <AdvertHero />
       </Fragment>
     );
   }

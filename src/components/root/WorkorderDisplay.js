@@ -282,7 +282,7 @@ export default function WorkorderDisplay({ currentProfile }) {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} square={true} elevation={3}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -338,7 +338,7 @@ export default function WorkorderDisplay({ currentProfile }) {
                 })}
               {emptyRows > 0 && (
                 // <TableRow style={{ height: (dense ? 33 : 36.7) * emptyRows }}>
-                <TableRow style={{ height: "44.3vh" }}>
+                <TableRow style={{ maxHeight: "44vh" }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
